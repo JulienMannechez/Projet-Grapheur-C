@@ -7,6 +7,6 @@
 #include <ctype.h>
 #include "jeton.h"
 
-int lexical(char str[], typejeton t[]);
+typeerreur lexical(char str[], typejeton t[]);
 
 #endif
