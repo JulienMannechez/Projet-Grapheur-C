@@ -13,7 +13,7 @@ typedef enum{
 
 /* Ajout la strucutre typeerreur de type ENUM */
 typedef enum {
-    RAS, FONC_INCONNUE, SYNTAX_ERROR,
+    RAS, FONC_INCONNUE, PARA_ERROR, OPERATEUR_ERROR, VARIABLE_ERROR,
 }typeerreur;
 
 typedef union{
@@ -35,3 +35,9 @@ typedef struct Node{
 } Node;
 
 typedef Node *Arbre;
+
+/* Rajout de ligne de Julien T pour stocker les couples x et y=f(x) */
+typedef struct {
+    float x;
+    float y;
+} Couple;

@@ -14,9 +14,10 @@ typeerreur lexical(char str[], typejeton t[]){
     int chaine_trouvee = 0;
     int mon_reel = 0;            
     char monZero[1];
+    int compteur_para = 0;
 
     printf("str entrée : %s \n\n",str); 
-    
+
     //Parcours de la chaine de caractère qu'on reçoit
     while(str[i] != '\0'){
 
@@ -25,10 +26,12 @@ typeerreur lexical(char str[], typejeton t[]){
             case '(' :
                 t[x].lexem = PAR_OUV;
                 x++;
+                compteur_para++;
                 break;
             case ')' :
                 t[x].lexem = PAR_FERM;
                 x++;
+                compteur_para++;
                 break;
             case '+' :
                 t[x].lexem = OPERATEUR;
@@ -140,7 +143,6 @@ typeerreur lexical(char str[], typejeton t[]){
                     x++;
                 } 
                 
-
         }
 
         //On remplit notre variable reel qui va contenir une chaine de notre valeur
@@ -163,18 +165,34 @@ typeerreur lexical(char str[], typejeton t[]){
 
         i++;
     }
+
     //Ajout du FIN a notre tab typejeton a la fin du parcours de la chaine
     t[x].lexem = FIN;
 
-
-    //S'il y a une erreur de syntaxe, on retourne SYNTAX_ERROR
-    if(strlen(str_fonction) > 1 && chaine_trouvee == 0) {
-        valeur_retour = SYNTAX_ERROR;
+    i = 0;
+    while(t[i].lexem != FIN){
+        //Test s'il y a bien deux opérandes autour d'un opérateur
+        if(t[i].lexem == OPERATEUR && t[i].valeur.operateur != MOINS && (t[i+1].lexem != REEL && t[i+1].lexem != VARIABLE || t[i-1].lexem != REEL && t[i-1].lexem != VARIABLE)) {
+            valeur_retour = OPERATEUR_ERROR;
+        } 
+        //Test s'il n'y a pas deux variables a la suite
+        if(t[i].lexem == VARIABLE && t[i+1].lexem == VARIABLE) {
+            valeur_retour = VARIABLE_ERROR;
+        }
+        i++;  
+    }
+    //S'il n'y a pas un nombre de paire de paranthèses, PARA ERROR
+    if((compteur_para % 2) != 0) {
+        valeur_retour = PARA_ERROR;
+    }
+    //S'il y a une erreur de syntaxe dans la fonction entré, on retourne FONC_INCONNUE
+    else if(strlen(str_fonction) > 1 && chaine_trouvee == 0) {
+        valeur_retour = FONC_INCONNUE;
     }
     //Sinon, on affiche nos données 
-    else {
-        //Affichage des données par numéro de la valeur (position dans la structure)
+    else if(valeur_retour == RAS) {
         i = 0;
+        //Affichage des données par numéro de la valeur (position dans la structure)
         while(t[i].lexem != FIN){
             if(t[i].lexem == OPERATEUR) {
                 printf("operateur position : %d \n", t[i].valeur.operateur);
@@ -194,9 +212,6 @@ typeerreur lexical(char str[], typejeton t[]){
             printf("FIN\n");
         }
     }
-
- 
-
 
     return valeur_retour;
 }
