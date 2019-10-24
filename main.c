@@ -18,14 +18,29 @@ void laCle(int c) {
 }
 
 void leTrace(void) {
-	setcolor(1.0F,1.0F,1.0F);
-	line(-1.0,-1.0,1.0,1.0);
-	if (bascule) {
-		setcolor(1.0F,0.0F,0.0F);
-		bar(-0.5F,-0.5F,0.5F,0.5F);
-	}
-	setcolor(1.0F,1.0F,0.0F);
-	outtextxy(0.0,0.0,"Pistache Team TM");
+	//test
+	//setcolor(1.0F,1.0F,1.0F);
+	//line(-1.0,-1.0,1.0,1.0);
+	//if (bascule) {
+	//	setcolor(1.0F,0.0F,0.0F);
+	//	bar(-0.5F,-0.5F,0.5F,0.5F);
+	//}
+	//setcolor(1.0F,1.0F,0.0F);
+	//outtextxy(0.0,0.0,"Pistache Team TM");
+
+	//setcolor(1.0F,1.0F,1.0F);
+
+	//Cadre
+	line(-0.90,-0.90,0.90,-0.90);
+	//setcolor(1.0F,1.0F,1.0F);
+	line(-0.90,-0.90,-0.90,0.90);
+	line(-0.90,0.90,0.90,0.90);
+	line(0.90,0.90,0.90,-0.90);
+
+	//Croix centrale
+	line(0.0,0.90,0.0,-0.90);
+	line(0.90,0.0,-0.90,0.0);
+
 }
 
 int main(int ac,char *av[]) {
@@ -33,4 +48,11 @@ int main(int ac,char *av[]) {
 	
 	InitGraph(ac,av,"Grapheur",1280,720,leTrace,laCle);
 	return 0;
+}
+
+void Graphe(couple tab[],float minX, float minY,float maxX,float maxY) {
+	boucle i=1{
+			line(tab[i].x,tab[i]y,$j,tab[i+1].x,tab[i+1].y);
+			i+1;
+	}
 }
