@@ -1,0 +1,13 @@
+Couple tab2[5];
+    tab2[0].x=-1;
+    tab2[0].y=7;
+    tab2[1].x=0;
+    tab2[1].y=3;
+    tab2[2].x=1;
+    tab2[2].y=-2;
+    tab2[3].x=2;
+    tab2[3].y=4;
+    tab2[4].x=3;
+    tab2[4].y=3;
+    
+    
