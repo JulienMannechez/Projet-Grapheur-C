@@ -1,6 +1,6 @@
-#include <windows.h>
-#include "glut.h"
-#include "graph.h"
+//#include <windows.h>
+#include <GL/glut.h>
+#include "Graph.h"
 
 /**
 * @file Graph.cpp

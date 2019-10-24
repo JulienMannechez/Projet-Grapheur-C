@@ -5,6 +5,7 @@
 #include <GL/glu.h>
 #include "entete.h"
 #include "Graph.h"
+#include "Graph.cpp"
 
 int bascule=0;
 
