@@ -8,6 +8,4 @@ Couple tab2[5];
     tab2[3].x=2;
     tab2[3].y=4;
     tab2[4].x=3;
-    tab2[4].y=3;
-    
-    
+    tab2[4].y=3;    
