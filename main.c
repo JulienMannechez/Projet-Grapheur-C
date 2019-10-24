@@ -3,6 +3,10 @@
 #include <math.h>
 #include <GL/glut.h>
 #include <GL/glu.h>
+#include "entete.h"
+#include "Graph.h"
+
+int bascule=0;
 
 void laCle(int c) {
 	switch(c) {
@@ -20,11 +24,12 @@ void leTrace(void) {
 		bar(-0.5F,-0.5F,0.5F,0.5F);
 	}
 	setcolor(1.0F,1.0F,0.0F);
-	outtexty(0.0,0.0,"Pistache Team TM");
+	outtextxy(0.0,0.0,"Pistache Team TM");
 }
 
-void main(int argc,char* argv) {
+int main(int ac,char *av[]) {
 	// On recois tableau [j].x et tableau[j].y
 	
-	glutInit(ac,ac,"Grapheur",1280,720,leTrace,laCle);
+	InitGraph(ac,av,"Grapheur",1280,720,leTrace,laCle);
+	return 0;
 }
