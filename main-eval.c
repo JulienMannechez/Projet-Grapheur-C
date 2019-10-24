@@ -50,8 +50,8 @@ int main() {
     printf("###Test de remplissage d'un tableau\n");
     /* valeurs qui peuvent changer */ 
     
-    float min=0, max=10;
-    int nbe_valeur=5;
+    float min=-5, max=5;
+    int nbe_valeur=10;
 
     Couple tab[nbe_valeur];//tableau de nbe valeur couples
     
@@ -61,6 +61,7 @@ int main() {
 
     /* affichage du tableau */
     affiche_tab_couple(tab,nbe_valeur);
+
 
     printf("### MAIN - fin de programme ###\n\n");//sortie du programme
     return 0;
