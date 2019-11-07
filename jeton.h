@@ -15,12 +15,10 @@ typedef enum{
     ABS,SIN,SQRT,LOG,COS,TAN,EXP,ENTIER,VAL_NEG,SINC
 }typefonction;
 
-/* Rajout de ligne de Julien T pour prendre en compte type erreur
-qui n'est pas defini de base, le type erreur est un entier */
-typedef struct {
-    int num_erreur;/* le code erreur de retour */
+/* Ajout la strucutre typeerreur de type ENUM */
+typedef enum {
+    RAS, FONC_INCONNUE, PARA_ERROR, OPERATEUR_ERROR, VARIABLE_ERROR,
 }typeerreur;
-/*Fin des lignes ajoutées par Julien T*/
 
 //énumération des différents types de valeurs existantes
 typedef union{
