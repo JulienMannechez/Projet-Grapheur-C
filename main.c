@@ -3,8 +3,8 @@
 int main() {
 
     //Tableau de jeton (lexem, valeur)
-    typejeton t[50];
-    //On rÃ©cupÃ¨re notre valeur de retour pour la fonction lexical
+    typejeton* tab = (typejeton*)malloc(50*sizeof(typejeton));
+    //On récupère notre valeur de retour pour la fonction lexical
     typeerreur valeur_retour;
 
     char str[50];
@@ -16,37 +16,40 @@ int main() {
             continue;
         }
         printf("\n");
-        valeur_retour = lexical(str, t);
+        valeur_retour = lexical(str, tab);
         if(valeur_retour == FONC_INCONNUE){
             printf("Fonction inconnue.\n");
             continue;
-        } 
+        }
         else if(valeur_retour == PARA_ERROR){
-            printf("Nombre de paranthÃ¨ses impaire.\n");
+            printf("Nombre de paranthèses impaire.\n");
             continue;
-        } 
+        }
         else if(valeur_retour == OPERATEUR_ERROR){
-            printf("OpÃ©rateur sans ses deux opÃ©randes autour.\n");
+            printf("Opérateur sans ses deux opérandes autour.\n");
             continue;
         }
         else if(valeur_retour == VARIABLE_ERROR){
-            printf("ProblÃ¨mes de variables.\n");
+            printf("Problèmes de variables.\n");
             continue;
         }
+
+        int i = 0;
+        Arbre A = syntaxe(tab, &i);
 
         //On demande nos bornes pour l'affichage du graphe
         //Borne inf
         float borne_inf;
-        printf("\nEntrez la borne infÃ©rieure : ");
+        printf("\nEntrez la borne inférieure : ");
         scanf("%f", &borne_inf);
 
 
         //Borne sup
         float borne_sup;
-        printf("\nEntrez la borne supÃ©rieur : ");
+        printf("\nEntrez la borne supérieur : ");
         scanf("%f", &borne_sup);
 
-        
+
         printf("\n");
     }
 

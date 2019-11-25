@@ -1,4 +1,3 @@
-/*Jeton .h donné dans le cours */
 typedef enum{
     REEL,OPERATEUR,FONCTION,ERREUR,FIN,PAR_OUV,PAR_FERM,VARIABLE,BAR_OUV,BAR_FERM,ABSOLU
 }typelexem;
@@ -31,7 +30,7 @@ typedef struct{
 typedef struct Node{
     typejeton jeton;
     struct Node *pjeton_preced;
-    struct Node *pjeton_suiv;  
+    struct Node *pjeton_suiv;
 } Node;
 
 typedef Node *Arbre;
@@ -41,3 +40,4 @@ typedef struct {
     float x;
     float y;
 } Couple;
+
