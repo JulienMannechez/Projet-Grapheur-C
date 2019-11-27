@@ -2,7 +2,7 @@
 
 typeerreur lexical(char str[], typejeton* tab){
 
-    //Déclaratabions etab initabialisatabion des variables
+    //Déclaratabions etab initialisation des variables
     typeerreur valeur_retour;
     valeur_retour = RAS;
     int i = 0;

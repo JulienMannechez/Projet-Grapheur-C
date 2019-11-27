@@ -1,4 +1,4 @@
-#include "lexical.h"
+#include "jeton.h"
 
 int main() {
 
@@ -35,7 +35,13 @@ int main() {
         }
 
         int i = 0;
-        Arbre A = syntaxe(tab, &i);
+        Arbre monArbre;
+        monArbre = syntaxe(tab, &i);
+
+        float x = 33;
+        float y = 0;
+        y = evaluer(monArbre, x);
+        printf("voila la valeur y : %f\n\n\n",y);//affichage du résultat
 
         //On demande nos bornes pour l'affichage du graphe
         //Borne inf
@@ -43,11 +49,23 @@ int main() {
         printf("\nEntrez la borne inférieure : ");
         scanf("%f", &borne_inf);
 
-
         //Borne sup
         float borne_sup;
         printf("\nEntrez la borne supérieur : ");
         scanf("%f", &borne_sup);
+
+        // On initialise un nombre de valeur max
+        int nbr_valeur = 10;
+
+        //tableau de nbe valeur couples
+        Couple tab_valeur[nbr_valeur];
+
+        // remplissage du tableau
+        remplis_tab_couple(borne_inf, borne_sup, nbr_valeur, monArbre, tab_valeur);
+
+
+        // affichage du tableau
+        affiche_tab_couple(tab_valeur, nbr_valeur);
 
 
         printf("\n");
