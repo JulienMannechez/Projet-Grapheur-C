@@ -1,34 +1,44 @@
-/* Fonction Evaluer - Julien TISSIER - Pas de second membre de binôme */
+/* Fonction Evaluer - Julien TISSIER - Pas de second membre de binï¿½me */
 
 #include "evaluateur.h"
 
 /* ### Fonction absolu - Retourne l'absolu d'un float ### */
 float absolu(float f){
-    if(f<0){/* Si f est négatif on retourne -f*/
+    if(f<0){/* Si f est nï¿½gatif on retourne -f*/
         return -f;
     }
     else{/* Sinon on retourne directement f*/
         return f;
     }
-}/* nécessaire car la fonction absolu de math.h retourne un double */
+}/* nï¿½cessaire car la fonction absolu de math.h retourne un double */
 
 
 /* ### Fonction evaluer - Retourne un float qui a pour valeur f(x) ### */
-    /* Son rôle est de traiter le code postfixé produit en sortie par l'analyseur syntaxique
-    (ou parcourir l’arbre) et de permettre la production des couples (x,f(x)) à destination du grapheur
-    on lui passe en paramètres l'arbre créé par l'analyseur syntaxique et la valeur de x à évaluer */
+    /* Son rï¿½le est de traiter le code postfixï¿½ produit en sortie par l'analyseur syntaxique
+    (ou parcourir lï¿½arbre) et de permettre la production des couples (x,f(x)) ï¿½ destination du grapheur
+    on lui passe en paramï¿½tres l'arbre crï¿½ï¿½ par l'analyseur syntaxique et la valeur de x ï¿½ ï¿½valuer */
 
-/* Effectue le calcul de la valeur de x par la fonction définie dans l'arbre A, et retourne la valeur f(x) */
+/* Effectue le calcul de la valeur de x par la fonction dï¿½finie dans l'arbre A, et retourne la valeur f(x) */
 float evaluer(Arbre A, float val_x){
     short mode_debug=0;/* Mode debug - 1 pour actif */
 
-    if (mode_debug==1){printf("#Entrée dans la fonction evaluer \n");}
+    if (mode_debug==1){printf("#EntrÃ©e dans la fonction evaluer \n");}
 
-    /* variables float locales x et y nécessaire pour le calcul des valeurs et des valeurs enfants */
+    if (mode_debug==1){// teste du arbre null, ou affiche le numÃ©ro du lexem en cours
+        if (A == NULL){
+            printf("#L'arbre passÃ© est NULL\n");
+        }
+        else
+        {
+            printf("#Voici le numÃ©ro du lexem en cours d'evaluation: %d  \n",A->jeton.lexem);
+        }
+    }
+
+    /* variables float locales x et y nï¿½cessaire pour le calcul des valeurs et des valeurs enfants */
     float y;
     float z;
 
-    /* on commence par étudier le jeton en cours de traitement */
+    /* on commence par ï¿½tudier le jeton en cours de traitement */
     switch (A->jeton.lexem)/* on regarde le lexem dans le jeton en cours de traitement */
     {
         case REEL:/* si le lexem est un reel, on renvoie directement la valeur du reel */
@@ -39,7 +49,7 @@ float evaluer(Arbre A, float val_x){
             return A->jeton.valeur.reel;
             break;
 
-        case VARIABLE:/* si le lexem est une variable, on renvoie directement la valeur de x passée en argument */
+        case VARIABLE:/* si le lexem est une variable, on renvoie directement la valeur de x passï¿½e en argument */
             if (mode_debug==1){
                 printf("#Cas lexem variable \n");
                 printf("#float : %f\n",val_x);
@@ -47,14 +57,14 @@ float evaluer(Arbre A, float val_x){
             return val_x;
             break;
 
-        case FONCTION:/* si c'est une fonction, on calcule le contenu de l'enfant de la fonction et on applique la fontion au résultat obtenu */
+        case FONCTION:/* si c'est une fonction, on calcule le contenu de l'enfant de la fonction et on applique la fontion au rï¿½sultat obtenu */
 
             if (mode_debug==1){printf("#Cas fonction \n");}
 
-            y = evaluer(A->pjeton_preced,val_x);//on calcule le contenu de l'enfant, on le stocke dans y, et on applique la fonction à y
+            y = evaluer(A->pjeton_preced,val_x);//on calcule le contenu de l'enfant, on le stocke dans y, et on applique la fonction ï¿½ y
 
             switch (A->jeton.valeur.fonction)//selon la fonction, on fait le calcul correspondant
-            {//fonctions à traiter : SIN,COS,ABS,SQRT,LOG,TAN,EXP,ENTIER,VAL_NEG,SINC
+            {//fonctions ï¿½ traiter : SIN,COS,ABS,SQRT,LOG,TAN,EXP,ENTIER,VAL_NEG,SINC
                 case SIN:
                     if (mode_debug==1){
                         printf("#Cas fonction SINUS \n");
@@ -81,18 +91,18 @@ float evaluer(Arbre A, float val_x){
                     if (mode_debug==1){
                         printf("#Cas fonction SQRT (racine caree) \n");
                         printf("#valeur avant sqrt = %f\n",y);
-                        /* Vérif que y est supérieur ou égal à 0, sinon c'est indéfini */
+                        /* Vï¿½rif que y est supï¿½rieur ou ï¿½gal ï¿½ 0, sinon c'est indï¿½fini */
                         if (y<0){
                         printf("ERR demande SQRT d'un nombre < 0 \n");
                         }
                     }
                     return sqrtf(y);/* On utilise la fonction sqrtf afin de traiter uniquement avec des types float */
                     break;
-                case LOG:/* fonction log népérien */
+                case LOG:/* fonction log nï¿½pï¿½rien */
                     if (mode_debug==1){
                         printf("#Cas fonction LOG \n");
                         printf("#valeur avant ln = %f\n",y);
-                        /* Vérif que y est supérieur à 0, sinon c'est indéfini */
+                        /* Vï¿½rif que y est supï¿½rieur ï¿½ 0, sinon c'est indï¿½fini */
                         if (y<=0){
                         printf("ERR demande ln d'un nombre <= 0 \n");
                         }
@@ -113,20 +123,20 @@ float evaluer(Arbre A, float val_x){
                     }
                     return exp(y);
                     break;
-                case ENTIER:/* fonction qui retourne la partie entière de y */
-                    /* a noter la definition de la partie entiere : "le plus grand entier inférieur ou égal à un nombre donné" */
+                case ENTIER:/* fonction qui retourne la partie entiï¿½re de y */
+                    /* a noter la definition de la partie entiere : "le plus grand entier infï¿½rieur ou ï¿½gal ï¿½ un nombre donnï¿½" */
                     if (mode_debug==1){
                         printf("#Cas fonction partie entiere \n");
-                        printf("#valeur y avant partie entière = %f\n",y);
+                        printf("#valeur y avant partie entiï¿½re = %f\n",y);
                     }
                     return floorf(y);
                     break;
-                case VAL_NEG:/* fonction qui retourne la valeur négative de y */
+                case VAL_NEG:/* fonction qui retourne la valeur nï¿½gative de y */
                     if (mode_debug==1){
                         printf("#Cas fonction valeur neg \n");
                         printf("#valeur y avant valeur neg = %f\n",y);
                     }
-                    return -absolu(y);/* on retourne l'oposé de l'absolu de y */
+                    return -absolu(y);/* on retourne l'oposï¿½ de l'absolu de y */
                     break;
                 case SINC:/* fonction qui retourne le sinus cardinal de y */
                     /* a noter que sinc(x)=sin(x)/x */
@@ -134,7 +144,7 @@ float evaluer(Arbre A, float val_x){
                         printf("#Cas fonction sinus cardinal \n");
                         printf("#valeur y avant sinus cardinal = %f\n",y);
 
-                        /* Vérifier que y est différent de 0, sinon c'est indéfini */
+                        /* Vï¿½rifier que y est diffï¿½rent de 0, sinon c'est indï¿½fini */
                         if (y==0){
                             printf("ERR Division par 0 dans le sinus cardinal (x=0) \n");
                         }
@@ -148,15 +158,15 @@ float evaluer(Arbre A, float val_x){
                     }
                     break;
             }
-            return y;//on retourne le résultat de l'application de la fonction sur l'objet enfant
+            return y;//on retourne le rï¿½sultat de l'application de la fonction sur l'objet enfant
             break;
 
-        case OPERATEUR:/* si c'est un opérateur, on calcule le contenu des deux enfants de la fonction et on applique l'opération au résultat */
+        case OPERATEUR:/* si c'est un opï¿½rateur, on calcule le contenu des deux enfants de la fonction et on applique l'opï¿½ration au rï¿½sultat */
             if (mode_debug==1){printf("##Cas operateur \n");}
             y = evaluer(A->pjeton_preced,val_x);//calcul de l'enfant 1
             z = evaluer(A->pjeton_suiv,val_x);//calcul de l'enfant 2
-                switch (A->jeton.valeur.operateur)//selon l'opérateur on fait le calcul correspondant
-                {//opérations à traiter : PLUS,MOINS,FOIS,DIV,PUIS
+                switch (A->jeton.valeur.operateur)//selon l'opï¿½rateur on fait le calcul correspondant
+                {//opï¿½rations ï¿½ traiter : PLUS,MOINS,FOIS,DIV,PUIS
                     case PLUS:
                         if (mode_debug==1){
                             printf("##Cas operateur PLUS \n");
@@ -190,7 +200,7 @@ float evaluer(Arbre A, float val_x){
                             printf("##valeur y = %f\n",y);
                             printf("##valeur z = %f\n",z);
 
-                            /* Vérifier que z est différent de 0, sinon c'est indéfini */
+                            /* Vï¿½rifier que z est diffï¿½rent de 0, sinon c'est indï¿½fini */
                             if (z==0){
                                 printf("ERR DIVISION PAR 0 \n");
                             }
@@ -219,14 +229,13 @@ float evaluer(Arbre A, float val_x){
     }
 
     printf("#sortie de la fonction evaluer \n");
-    return y;//on en sortie retourne le résultat de l'arbre (A) appliqué à la valeur de x (val_x)
+    return y;//on en sortie retourne le rï¿½sultat de l'arbre (A) appliquï¿½ ï¿½ la valeur de x (val_x)
 }
 
-/* Affiche le tableau de couples passé en argument*/
+/* Affiche le tableau de couples passï¿½ en argument*/
 void affiche_tab_couple(Couple tab[], int taille_tab){
     printf("#Fonction d'affichage du tableau de couples \n");
-    int i;
-    for (i = 0; i <= taille_tab; i++)
+    for (int i = 0; i <= taille_tab; i++)
     {
         printf("x=%f | y=%f\n",tab[i].x,tab[i].y);
     }
@@ -234,40 +243,50 @@ void affiche_tab_couple(Couple tab[], int taille_tab){
 }
 
 /* remplis le tableau de couples x,f(x)
-    prend en arguments le min et le max de x, le nombre de valeurs (précision), l'arbre de la fonction et le tableau à remplir */
-void remplis_tab_couple(float min, float max, int nbr_valeur, Arbre Arbre, Couple tableau[]){
-    printf("#Fonction de remplissage du tableau de couples \n");
+    prend en arguments le min et le max de x, le nombre de valeurs (prï¿½cision), l'arbre de la fonction et le tableau ï¿½ remplir */
+void remplis_tab_couple(float min_x, float max_x, int nbr_valeur, Arbre Arbre, Couple tableau[]){
+    short mode_debug=1;
+
+    if (mode_debug==1){
+        printf("#Fonction de remplissage du tableau de couples \n");
+        printf("#borne min entrÃ©e : %f\n",min_x);
+        printf("#borne max entrÃ©e : %f\n",max_x);
+        printf("#nombre de valeurs demandÃ©es : %d\n",nbr_valeur);
+    }
+
     int j=0;/* sert pour l'indice du tableau */
 
     /*#### ajout code pour avoir min et max de y (si les groupe grapheur en a besoin)*/
-    float miny,maxy;
-    miny = evaluer(Arbre,min);//on stocke la première valeur au départ
-    maxy = evaluer(Arbre,min);
+    float min_y,max_y;
+    min_y = evaluer(Arbre,min_x);//on stocke la premiï¿½re valeur au dï¿½part
+    if (mode_debug==1){printf("#minimum de dÃ©part = %f\n",min_y);}
+    max_y = evaluer(Arbre,min_x);
+    if (mode_debug==1){printf("#max de dÃ©part = %f\n",max_y);}
     /*#### fin ajout code pour avoir min et max de y (si les groupe grapheur en a besoin)*/
     float i;
-    for (i = min; i <= max; i=i+((max-min)/nbr_valeur))/* On parcours l'axe des x du min au max en utilisant le pas calculé automatiquement */
+    for (i = min_x; i <= max_x; i=i+((max_x-min_x)/nbr_valeur))/* On parcours l'axe des x du min au max en utilisant le pas calculï¿½ automatiquement */
     {
-        //printf("j=%d - x=%f - y=%f\n",j,i,i);/* affichage pour debug */
+        if (mode_debug==1){printf("j=%d - x=%f - y=%f\n",j,i,evaluer(Arbre,i));}/* affichage pour debug */
         tableau[j].x=i;
         tableau[j].y=evaluer(Arbre,i);
 
         /*#### ajout code pour avoir min et max de y (si les groupe grapheur en a besoin)*/
-        if (evaluer(Arbre,i)<miny)
+        if (evaluer(Arbre,i)<min_y)
         {
-            miny=evaluer(Arbre,i);
+            min_y=evaluer(Arbre,i);
         }
-        if (evaluer(Arbre,i)>maxy)
+        if (evaluer(Arbre,i)>max_y)
         {
-            maxy=evaluer(Arbre,i);
+            max_y=evaluer(Arbre,i);
         }
         /*#### fin ajout code pour avoir min et max de y (si les groupe grapheur en a besoin)*/
 
-        j++;/* on passe à la case suivante du tableau */
+        j++;/* on passe ï¿½ la case suivante du tableau */
     }
 
     /*#### ajout code pour avoir min et max de y (si les groupe grapheur en a besoin)*/
-    printf("min en y : %f - max en y : %f\n",miny,maxy);
+    if (mode_debug==1){printf("min en y : %f - max en y : %f\n",min_y,max_y);}
     /*#### fin ajout code pour avoir min et max de y (si les groupe grapheur en a besoin)*/
 
-    printf("#Fin de fonction de remplissage du tableau de couples \n\n");
+    if (mode_debug==1){printf("#Fin de fonction de remplissage du tableau de couples \n\n");}
 }

@@ -7,20 +7,20 @@
 #include "jeton.h"
 
 
-/* Effectue de calcul de la valeur de x par la fonction définie dans l'arbre A */
+/* Effectue de calcul de la valeur de x par la fonction dï¿½finie dans l'arbre A */
 float evaluer(Arbre A, float val_x);
 /* Prend en argument un arbre et la valeur de la variable x */
-/* Retourne un float avec le résultat */
+/* Retourne un float avec le rï¿½sultat */
 
 /* Fonction qui retourne l'absolu d'un float */
-/* Nécessaire car la fonction absolu de math.h retourne un double */
+/* Nï¿½cessaire car la fonction absolu de math.h retourne un double */
 float absolu(float f);
 
-/* Affiche le tableau de couples passé en argument*/
+/* Affiche le tableau de couples passï¿½ en argument*/
 void affiche_tab_couple(Couple tab[], int taille_tab);
 
-/* remplis le tableau de couples x,f(x)
-    prend en arguments le min et le max de x, le nombre de valeurs (précision), l'arbre de la fonction et le tableau à remplir */
-void remplis_tab_couple(float min, float max, int nbr_valeur, Arbre Arbre, Couple tableau[]);
+/* remplis le tableauremplis_tab_couple de couples x,f(x)
+    prend en arguments le min et le max de x, le nombre de valeurs (prï¿½cision), l'arbre de la fonction et le tableau ï¿½ remplir */
+void remplis_tab_couple(float min_x, float max_x, int nbr_valeur, Arbre Arbre, Couple tableau[]);
 
 #endif
