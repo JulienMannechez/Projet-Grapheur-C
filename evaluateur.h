@@ -7,6 +7,7 @@
 #include "jeton.h"
 
 
+
 /* Effectue de calcul de la valeur de x par la fonction d�finie dans l'arbre A */
 float evaluer(Arbre A, float val_x);
 /* Prend en argument un arbre et la valeur de la variable x */

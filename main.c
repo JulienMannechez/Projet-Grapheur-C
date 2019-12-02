@@ -5,6 +5,9 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
+#include "syntaxique.h"
+#include "lexical.h"
+#include "evaluateur.h"
 //Fin rajout julien T 
 
 int main() {
@@ -90,7 +93,7 @@ int main() {
             //Fin de générationd d'un arbre manuellement
         //////////////////////////////////
         
-        float x = 1;
+        float x = 3;
         float z = 0;
         z = evaluer(Arbabs, 2);
         printf("voila la valeur z : %f\n\n\n",z);//affichage du r�sultat
