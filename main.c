@@ -47,8 +47,8 @@ int main() {
         int i = 0;
         
         /* Commenté par JT pour tester avec un arbre manuel*/
-        //Arbre monArbre;
-        //monArbre = syntaxe(tab, &i);
+        Arbre monArbre;
+        monArbre = syntaxe(tab, &i);
 
         //possibilité d'afficher l'arbre reçu ?
         /* Fin Commenté par JT pour tester avec un arbre manuel*/
@@ -61,7 +61,7 @@ int main() {
             donc arbre : abs -> abs -> x -> x
                                             -> 2
             */
-                Arbre Arb2 = (Arbre)malloc(sizeof(struct Node));//reservation de l'espace
+                /*Arbre Arb2 = (Arbre)malloc(sizeof(struct Node));//reservation de l'espace
                 Arb2->pjeton_preced=NULL;
                 Arb2->pjeton_suiv=NULL;
                 Arb2->jeton.lexem=REEL;
@@ -89,13 +89,13 @@ int main() {
                 Arbabs->pjeton_preced=Arbfonction;
                 Arbabs->pjeton_suiv=NULL;
                 Arbabs->jeton.lexem=FONCTION;
-                Arbabs->jeton.valeur.fonction=ABS;
+                Arbabs->jeton.valeur.fonction=ABS;*/
             //Fin de générationd d'un arbre manuellement
         //////////////////////////////////
         
-        float x = 3;
+        //float x = 3;
         float z = 0;
-        z = evaluer(Arbabs, 2);
+        z = evaluer(monArbre, 2);
         printf("voila la valeur z : %f\n\n\n",z);//affichage du r�sultat
 
         /* Commenté par JT - le résultat n'est pas bon meme avec l'arbre fait en manuel*/
@@ -111,7 +111,7 @@ int main() {
         printf("\nEntrez la borne sup�rieur : ");
         scanf("%f", &borne_sup);
 
-        printf("\nBorne inf et sup : %f - %f \n",borne_inf, borne_sup);//Tests JT
+        //printf("\nBorne inf et sup : %f - %f \n",borne_inf, borne_sup);//Tests JT
 
         // On initialise un nombre de valeur max
         int nbr_valeur = 10;
@@ -122,7 +122,7 @@ int main() {
         /* Commenté par JT - problème pour passer les float en argument à la fonction*/
         // je teste d'entrée dans la fonction ce qui est en argument et je n'obtiens que des 0
         // remplissage du tableau
-        remplis_tab_couple(borne_inf, borne_sup, nbr_valeur, Arbabs, tab_valeur);
+        remplis_tab_couple(borne_inf, borne_sup, nbr_valeur, monArbre, tab_valeur);
 
         // affichage du tableau
         affiche_tab_couple(tab_valeur, nbr_valeur);

@@ -245,7 +245,7 @@ void affiche_tab_couple(Couple tab[], int taille_tab){
 /* remplis le tableau de couples x,f(x)
     prend en arguments le min et le max de x, le nombre de valeurs (pr�cision), l'arbre de la fonction et le tableau � remplir */
 void remplis_tab_couple(float min_x, float max_x, int nbr_valeur, Arbre Arbre, Couple tableau[]){
-    short mode_debug=1;
+    short mode_debug=0;
     if (mode_debug==1){
         printf("#Fonction de remplissage du tableau de couples \n");
         printf("#borne min entrée : %f\n",min_x);
