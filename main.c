@@ -8,6 +8,7 @@
 #include "syntaxique.h"
 #include "lexical.h"
 #include "evaluateur.h"
+#include "grapheur.h"
 //Fin rajout julien T 
 
 int main() {
