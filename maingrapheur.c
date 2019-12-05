@@ -5,7 +5,6 @@ Couple tab[2000];
 int main(int argc, char *argv[])
 {
     // On recois tableau [j].x et tableau[j].y
-    Couple tab[2000];
     float j = 0;
     int i = 0;
     for (i = 0; i < sizeof(tab) / 8; i++)

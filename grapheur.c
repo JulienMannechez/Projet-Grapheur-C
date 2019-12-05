@@ -81,7 +81,7 @@ static void GlutDraw(void)
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   Begin2DDisplay();
   if (AppliDraw)
-    (*AppliDraw)(tab);
+    (*AppliDraw)();
   End2DDisplay();
   glutSwapBuffers();
 }
@@ -104,7 +104,7 @@ static void GlutDraw(void)
 * @parma c entier designant le code ascii d'une touche
 *
 */
-void InitGraph(int ac, char *av[],const char *WinName, const int w, const int h, void (*Draw)(Couple *tab), void (*Key)(int), Couple *tab)
+void InitGraph(int ac, char *av[],const char *WinName, const int w, const int h, void (*Draw)(Couple *tab), void (*Key)(int))
 {
   glutInit(&ac, av);
   Width = w;
@@ -117,7 +117,7 @@ void InitGraph(int ac, char *av[],const char *WinName, const int w, const int h,
   glutIdleFunc(GlutIdle);       /* fonction appelee en boucle */
   AppliKey = Key;
   glutKeyboardFunc(GlutKey);
-  AppliDraw = Draw(tab);
+  AppliDraw = Draw();
   glutDisplayFunc(GlutDraw);
   InitDisplay();
   glutMainLoop();
@@ -253,7 +253,7 @@ void Cle(int c)
   }
 }
 
-void Dessin(Couple *tab)
+void Dessin()
 {
   glPushMatrix(); /* GL_MODELVIEW is default */
   glScalef(scale_x, offset_x, 1.0);
