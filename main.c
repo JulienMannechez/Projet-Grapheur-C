@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
         printf("\nEntrez une formule (quit pour arreter) : ");
         scanf("%s", str);
         if(strcmp(str, "quit") == 0) {
-            printf("\naurevoir. \n"); #Giscard D'estaing
+            printf("\naurevoir. \n"); //Giscard D'estaing
             continue;
         }
         printf("\n");
