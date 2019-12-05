@@ -104,9 +104,7 @@ static void GlutDraw(void)
 * @parma c entier designant le code ascii d'une touche
 *
 */
-void InitGraph(int ac, char *av[],
-               const char *WinName, const int w, const int h, void (*Draw)(void),
-               void (*Key)(int))
+void InitGraph(int ac, char *av[],const char *WinName, const int w, const int h, void (*Draw)(Couple *tab), void (*Key)(int), Couple *tab)
 {
   glutInit(&ac, av);
   Width = w;
@@ -119,7 +117,7 @@ void InitGraph(int ac, char *av[],
   glutIdleFunc(GlutIdle);       /* fonction appelee en boucle */
   AppliKey = Key;
   glutKeyboardFunc(GlutKey);
-  AppliDraw = Draw;
+  AppliDraw = Draw(tab);
   glutDisplayFunc(GlutDraw);
   InitDisplay();
   glutMainLoop();
@@ -215,10 +213,10 @@ void outtextxy(const float x, const float y, const char *str)
   }
 }
 
-float offset_x = 1.0 / (Ymax - Ymin);
-float scale_x = 1.0 / (Xmax - Xmin);
-float Translate_x = -Xmin;
-float Translate_y = -Ymin;
+float offset_x /*= 1.0 / (Ymax - Ymin)*/;
+float scale_x /*= 1.0 / (Xmax - Xmin)*/;
+float Translate_x /*= -Xmin*/;
+float Translate_y /*= -Ymin*/;
 
 void Cle(int c)
 {
@@ -236,10 +234,10 @@ void Cle(int c)
   case 's':
     scale_x /= 1.5;
     break;
-  case 'r':
+  /*case 'r':
     offset_x = 1.0 / (Ymax - Ymin);
     scale_x = 1.0 / (Xmax - Xmin);
-    break;
+    break;*/
   case 'j':
     Translate_x += 0.1;
     break;
@@ -255,7 +253,7 @@ void Cle(int c)
   }
 }
 
-void Dessin()
+void Dessin(Couple *tab)
 {
   glPushMatrix(); /* GL_MODELVIEW is default */
   glScalef(scale_x, offset_x, 1.0);
@@ -271,7 +269,17 @@ void Dessin()
   
   /*setcolor(1.0F,1.0F,1.0F);
 	line(-1.0,-1.0,1.0,1.0);
-	
+	static void GlutKey(const unsigned char c, const int x, const int y)
+{
+  switch (c)
+  {
+  default:
+    if (AppliKey)
+      (*AppliKey)(c);
+    break;
+  }
+  glutPostRedisplay();
+}
 	setcolor(1.0F,1.0F,0.0F);
 	outtextxy(0.0,0.0,"Text");
   if (bascule) {

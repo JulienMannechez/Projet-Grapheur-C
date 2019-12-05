@@ -36,9 +36,7 @@
 *	 c designant le code ascii de la touche
 *
 */
-void InitGraph(int ac, char *av[], const char *WinName,
-               const int w, const int h, void (*Draw)(void),
-               void (*Key)(int c));
+void InitGraph(int ac, char *av[], const char *WinName,const int w, const int h, void (*Draw)(Couple *tab),void (*Key)(int c), Couple *tab);
 /**
 * line
 *
@@ -122,15 +120,15 @@ void finishlines(void);
 void outtextxy(const float x, const float y, const char *s);
 
 
-extern Couple tab[2000];
+/*extern Couple tab[2000];
 const int Xmin = 0;
 const int Xmax = (sizeof(tab) / 8) * 0.1;
 const int Ymin = 0;
-const int Ymax = 1;
+const int Ymax = 1;*/
 extern float offset_x;
 extern float scale_x;
 extern float Translate_x;
 extern float Translate_y;
 
-void Dessin();
+void Dessin(Couple *tab);
 void Cle(int c);
