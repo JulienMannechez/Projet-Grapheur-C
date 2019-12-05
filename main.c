@@ -194,8 +194,8 @@ int main(int argc, char *argv[]) {
             Traçage de la courbe 
         #####################################################################*/
         offset_x= 1.0 / (ymax - ymin);
-		scale_x= 1.0 / (xmax - xmin);
-		Translate_x= -xmin;
+		scale_x= 1.0 / (borne_inf - borne_sup);
+		Translate_x= -borne_inf;
 		Translate_y= -ymin;
     	InitGraph(argc, argv, "Grapheur", 1280, 720, Dessin, Cle);
 
