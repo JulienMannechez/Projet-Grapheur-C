@@ -81,7 +81,7 @@ static void GlutDraw(void)
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   Begin2DDisplay();
   if (AppliDraw)
-    (*AppliDraw)();
+    (*AppliDraw)(tab);
   End2DDisplay();
   glutSwapBuffers();
 }
@@ -266,7 +266,6 @@ void Dessin(Couple *tab)
   {
     line(tab[i].x, tab[i].y, tab[i + 1].x, tab[i + 1].y);
   }
-  
   /*setcolor(1.0F,1.0F,1.0F);
 	line(-1.0,-1.0,1.0,1.0);
 	static void GlutKey(const unsigned char c, const int x, const int y)

@@ -1,9 +1,9 @@
 #pragma once
 #include <stdio.h>
-#include <stdlib.h>
+//#include <stdlib.h>
 #include <math.h>
 #include <GL/glut.h>
-#include <GL/glu.h>
+//#include <GL/glu.h>
 #include "jeton.h"
 
 /**
@@ -36,7 +36,7 @@
 *	 c designant le code ascii de la touche
 *
 */
-void InitGraph(int ac, char *av[], const char *WinName,const int w, const int h, void (*Draw)(Couple *tab),void (*Key)(int c), Couple *tab);
+void InitGraph(int ac, char *av[], const char *WinName,const int w, const int h, void (*Draw)(),void (*Key)(int c));
 /**
 * line
 *
@@ -96,7 +96,6 @@ void lineto(const float x, const float y);
 *
 */
 void finishlines(void);
-
 /**
 * bar
 *
@@ -121,15 +120,16 @@ void outtextxy(const float x, const float y, const char *s);
 
 
 /*
+extern Couple tab[2000];
 const int Xmin = 0;
 const int Xmax = (sizeof(tab) / 8) * 0.1;
 const int Ymin = 0;
 const int Ymax = 1;*/
-extern Couple tab[2000];
+
 extern float offset_x;
 extern float scale_x;
 extern float Translate_x;
 extern float Translate_y;
 
-void Dessin(Couple *tab);
+void Dessin();
 void Cle(int c);
