@@ -9,9 +9,9 @@
 #include "syntaxique.h"
 #include "lexical.h"
 #include "evaluateur.h"
-//#include "grapheur.h"
+#include "grapheur.h"
 
-int main() {
+int main(int argc, char *argv[]) {
 
     /*Variables nécessaires pour tout le programme */
     int nbr_valeur = 10;
@@ -193,6 +193,11 @@ int main() {
                       Partie 4 - Grapheur
             Traçage de la courbe 
         #####################################################################*/
+        offset_x= 1.0 / (ymax - ymin);
+		scale_x= 1.0 / (xmax - xmin);
+		Translate_x= -xmin;
+		Translate_y= -ymin;
+    	InitGraph(argc, argv, "Grapheur", 1280, 720, Dessin, Cle);
 
     }
 
