@@ -120,11 +120,12 @@ void finishlines(void);
 void outtextxy(const float x, const float y, const char *s);
 
 
-/*extern Couple tab[2000];
+/*
 const int Xmin = 0;
 const int Xmax = (sizeof(tab) / 8) * 0.1;
 const int Ymin = 0;
 const int Ymax = 1;*/
+extern Couple tab[2000];
 extern float offset_x;
 extern float scale_x;
 extern float Translate_x;
