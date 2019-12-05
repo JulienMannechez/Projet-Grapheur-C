@@ -117,7 +117,7 @@ void InitGraph(int ac, char *av[],const char *WinName, const int w, const int h,
   glutIdleFunc(GlutIdle);       /* fonction appelee en boucle */
   AppliKey = Key;
   glutKeyboardFunc(GlutKey);
-  AppliDraw = Draw();
+  AppliDraw = Draw;
   glutDisplayFunc(GlutDraw);
   InitDisplay();
   glutMainLoop();
