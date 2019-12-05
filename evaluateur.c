@@ -20,7 +20,7 @@ float absolu(float f){
 
 /* Effectue le calcul de la valeur de x par la fonction définie dans l'arbre A, et retourne la valeur f(x) */
 float evaluer(Arbre A, float val_x){
-    short mode_debug=1;/* Mode debug - 1 pour actif */
+    short mode_debug=0;/* Mode debug - 1 pour actif */
 
     if (mode_debug==1){printf("#Entrée dans la fonction evaluer \n");}
 
@@ -234,17 +234,17 @@ float evaluer(Arbre A, float val_x){
 
 /* Affiche le tableau de couples passé en argument*/
 void affiche_tab_couple(Couple tab[], int taille_tab){
-    printf("#Fonction d'affichage du tableau de couples \n");
+    printf("\n#Fonction d'affichage du tableau de couples \n");
     for (int i = 0; i <= taille_tab; i++)
     {
         printf("x=%f | y=%f\n",tab[i].x,tab[i].y);
     }
-    printf("\n\n");
+    printf("\n");
 }
 
 /* remplis le tableau de couples x,f(x)
     prend en arguments le min et le max de x, le nombre de valeurs (précision), l'arbre de la fonction et le tableau à remplir */
-void remplis_tab_couple(float min_x, float max_x, int nbr_valeur, Arbre Arbre, Couple tableau[]){
+void remplis_tab_couple(float min_x, float max_x, int nbr_valeur, Arbre Arbre, Couple tableau[], float* y_min, float* y_max){
     short mode_debug=0;
     if (mode_debug==1){
         printf("#Fonction de remplissage du tableau de couples \n");
@@ -255,13 +255,12 @@ void remplis_tab_couple(float min_x, float max_x, int nbr_valeur, Arbre Arbre, C
 
     int j=0;/* sert pour l'indice du tableau */
 
-    /*#### ajout code pour avoir min et max de y (si les groupe grapheur en a besoin)*/
-    float min_y,max_y;
-    min_y = evaluer(Arbre,min_x);//on stocke la première valeur au départ
-    if (mode_debug==1){printf("#minimum de départ = %f\n",min_y);}
-    max_y = evaluer(Arbre,min_x);
-    if (mode_debug==1){printf("#max de départ = %f\n",max_y);}
-    /*#### fin ajout code pour avoir min et max de y (si les groupe grapheur en a besoin)*/
+    /*#### ajout code pour avoir min et max de y - besoin du groupe grapheur */
+    *y_min = evaluer(Arbre,min_x);//on stocke la première valeur au départ
+    if (mode_debug==1){printf("#minimum de départ = %f\n",*y_min);}
+    *y_max = evaluer(Arbre,min_x);
+    if (mode_debug==1){printf("#max de départ = %f\n",*y_max);}
+    /*#### fin ajout code pour avoir min et max de y*/
     float i;
     for (i = min_x; i <= max_x; i=i+((max_x-min_x)/nbr_valeur))/* On parcours l'axe des x du min au max en utilisant le pas calculé automatiquement */
     {
@@ -269,23 +268,22 @@ void remplis_tab_couple(float min_x, float max_x, int nbr_valeur, Arbre Arbre, C
         tableau[j].x=i;
         tableau[j].y=evaluer(Arbre,i);
 
-        /*#### ajout code pour avoir min et max de y (si les groupe grapheur en a besoin)*/
-        if (evaluer(Arbre,i)<min_y)
+        /*#### ajout code pour avoir min et max de y - besoin du groupe grapheur */
+        if (evaluer(Arbre,i)<*y_min)
         {
-            min_y=evaluer(Arbre,i);
+            *y_min=evaluer(Arbre,i);
         }
-        if (evaluer(Arbre,i)>max_y)
+        if (evaluer(Arbre,i)>*y_max)
         {
-            max_y=evaluer(Arbre,i);
+            *y_max=evaluer(Arbre,i);
         }
-        /*#### fin ajout code pour avoir min et max de y (si les groupe grapheur en a besoin)*/
+        /*#### fin ajout code pour avoir min et max de y*/
 
         j++;/* on passe à la case suivante du tableau */
     }
-
-    /*#### ajout code pour avoir min et max de y (si les groupe grapheur en a besoin)*/
-    if (mode_debug==1){printf("min en y : %f - max en y : %f\n",min_y,max_y);}
-    /*#### fin ajout code pour avoir min et max de y (si les groupe grapheur en a besoin)*/
+    /*#### ajout code pour avoir min et max de y - besoin du groupe grapheur */
+    if (mode_debug==1){printf("min en y : %f - max en y : %f\n",*y_min,*y_max);}
+    /*#### fin ajout code pour avoir min et max de y*/
 
     if (mode_debug==1){printf("#Fin de fonction de remplissage du tableau de couples \n\n");}
 }

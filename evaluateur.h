@@ -21,9 +21,10 @@ float absolu(float f);
 void affiche_tab_couple(Couple tab[], int taille_tab);
 
 /* remplis le tableauremplis_tab_couple de couples x,f(x)*/
-void remplis_tab_couple(float min_x, float max_x, int nbr_valeur, Arbre Arbre, Couple tableau[]);
+void remplis_tab_couple(float min_x, float max_x, int nbr_valeur, Arbre Arbre, Couple tableau[], float* y_min, float* ymax);
 /* Prend en arguments le min et le max de x, 
     le nombre de valeurs (précision), l'arbre de la fonction 
-    et le tableau à remplir */
+    le tableau à remplir 
+    et l'adresse du x et du y max que l'on souhaite retourner */
 
 #endif
