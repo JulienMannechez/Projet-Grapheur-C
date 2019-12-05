@@ -11,6 +11,13 @@
 #include "evaluateur.h"
 #include "grapheur.h"
 
+Couple tab[2000];
+float offset_x;
+float scale_x;
+float Translate_x;
+float Translate_y;
+
+
 int main(int argc, char *argv[]) {
 
     /*Variables nécessaires pour tout le programme */

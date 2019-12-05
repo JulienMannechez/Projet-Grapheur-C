@@ -213,11 +213,6 @@ void outtextxy(const float x, const float y, const char *str)
   }
 }
 
-float offset_x /*= 1.0 / (Ymax - Ymin)*/;
-float scale_x /*= 1.0 / (Xmax - Xmin)*/;
-float Translate_x /*= -Xmin*/;
-float Translate_y /*= -Ymin*/;
-
 void Cle(int c)
 {
   switch (c)
