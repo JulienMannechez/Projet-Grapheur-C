@@ -6,7 +6,7 @@
 #include "syntaxique.h"
 #include "lexical.h"
 #include "evaluateur.h"
-//#include "grapheur.h"
+#include "grapheur.h"
 
 int main() {
 
@@ -146,8 +146,12 @@ int main() {
 
         // affichage du tableau
         affiche_tab_couple(tab_valeur, nbr_valeur);
-
         printf("\n");
+        offset_x= 1.0 / (ymax - xmin);
+		scale_x= 1.0 / (ymax - xmin);
+		Translate_x= -xmin;
+		Translate_y= -ymin;
+		InitGraph(argc, argv, "Grapheur", 1280, 720, Dessin, Cle);
     }
 
     return 0;
