@@ -10,7 +10,7 @@
 
 static int WindowNumber;
 static int Width, Height;
-static void (*AppliDraw)(void);
+static void (*AppliDraw)();
 static void (*AppliKey)(int);
 
 /**
@@ -104,7 +104,7 @@ static void GlutDraw(void)
 * @parma c entier designant le code ascii d'une touche
 *
 */
-void InitGraph(int ac, char *av[],const char *WinName, const int w, const int h, void (*Draw)(Couple *tab), void (*Key)(int), Couple *tab)
+void InitGraph(int ac, char *av[],const char *WinName, const int w, const int h, void (*Draw)(Couple *tab), void (*Key)(int))
 {
   glutInit(&ac, av);
   Width = w;
@@ -117,7 +117,7 @@ void InitGraph(int ac, char *av[],const char *WinName, const int w, const int h,
   glutIdleFunc(GlutIdle);       /* fonction appelee en boucle */
   AppliKey = Key;
   glutKeyboardFunc(GlutKey);
-  AppliDraw = Draw(tab);
+  AppliDraw = Draw;
   glutDisplayFunc(GlutDraw);
   InitDisplay();
   glutMainLoop();
@@ -253,7 +253,7 @@ void Cle(int c)
   }
 }
 
-void Dessin(Couple *tab)
+void Dessin()
 {
   glPushMatrix(); /* GL_MODELVIEW is default */
   glScalef(scale_x, offset_x, 1.0);
@@ -266,7 +266,6 @@ void Dessin(Couple *tab)
   {
     line(tab[i].x, tab[i].y, tab[i + 1].x, tab[i + 1].y);
   }
-  
   /*setcolor(1.0F,1.0F,1.0F);
 	line(-1.0,-1.0,1.0,1.0);
 	static void GlutKey(const unsigned char c, const int x, const int y)

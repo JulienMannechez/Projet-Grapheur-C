@@ -5,7 +5,6 @@ Couple tab[2000];
 int main(int argc, char *argv[])
 {
     // On recois tableau [j].x et tableau[j].y
-    Couple tab[2000];
     float j = 0;
     int i = 0;
     for (i = 0; i < sizeof(tab) / 8; i++)
@@ -22,6 +21,6 @@ int main(int argc, char *argv[])
 	scale_x= 1.0 / (Xmax - Xmin);
 	Translate_x= -Xmin;
 	Translate_y= -Ymin;
-    InitGraph(argc, argv, "Grapheur", 1280, 720, Dessin(tab), Cle, tab);
+    InitGraph(argc, argv, "Grapheur", 1280, 720, Dessin, Cle);
     return 0;
 }
