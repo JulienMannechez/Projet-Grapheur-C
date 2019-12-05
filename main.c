@@ -1,3 +1,6 @@
+/*#####################################################################
+                        Projet Grapheur
+#####################################################################*/
 #include "jeton.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -17,13 +20,13 @@ int main() {
     float ymin=0;
     float ymax=0;
 
-    short mode_debug_main=0;
+    short mode_debug_main=0;/* active(1) ou désactive(0) le mode debug */
 
     /*#####################################################################
                       Partie 1 - analyse lexicale
                 Echange avec l'utilisateur sur la saisie de formule
-    #######################################################################
-    */
+    #####################################################################*/
+
     //Déclaration et allocation d'un tableau de jeton (lexem, valeur)
     typejeton* tab = (typejeton*)malloc(50*sizeof(typejeton));
     //On récupére notre valeur de retour pour la fonction lexical
@@ -64,8 +67,7 @@ int main() {
         /*#####################################################################
                       Partie 2 - analyse syntaxique
         Construction de l'arbre, basé sur le tableau fourni par la partie 1
-        #######################################################################
-        */
+        #####################################################################*/
         if (mode_debug_main==1){
             printf("\nAffichage de la construction de l'arbre partie 2\n");
         }
@@ -138,8 +140,7 @@ int main() {
         /*#####################################################################
                       Partie 3 - Evaluateur
                 Evaluation de l'arbre fourni par la partie 2
-        #######################################################################
-        */
+        #####################################################################*/
         if (mode_debug_main==1){
             float z = 0;
             z = evaluer(monArbre, 4);
@@ -191,8 +192,7 @@ int main() {
         /*#####################################################################
                       Partie 4 - Grapheur
             Traçage de la courbe 
-        #######################################################################
-        */
+        #####################################################################*/
 
     }
 
