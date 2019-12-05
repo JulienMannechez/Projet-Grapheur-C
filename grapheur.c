@@ -106,13 +106,21 @@ static void GlutDraw(void)
 */
 void InitGraph(int ac, char *av[],const char *WinName, const int w, const int h, void (*Draw)(void), void (*Key)(int))
 {
+  if (mode_debug==1){printf("Debug: Début d'éxécution d'InitGraph de grapheur.c\n");}
   glutInit(&ac, av);
+  if (mode_debug==1){printf("Debug: Début d'éxécution d'InitGraph de grapheur.c\n");}
   Width = w;
+	  if (mode_debug==1){printf("Debug: Début d'éxécution d'InitGraph de grapheur.c\n");}
   Height = h;
+  if (mode_debug==1){printf("Debug: Début d'éxécution d'InitGraph de grapheur.c\n");}
   glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+  if (mode_debug==1){printf("Debug: Début d'éxécution d'InitGraph de grapheur.c\n");}
   glutInitWindowPosition(0, 0);
+  if (mode_debug==1){printf("Debug: Début d'éxécution d'InitGraph de grapheur.c\n");}
   glutInitWindowSize(Width, Height);
+  if (mode_debug==1){printf("Debug: Début d'éxécution d'InitGraph de grapheur.c\n");}
   WindowNumber = glutCreateWindow(WinName);
+  if (mode_debug==1){printf("Debug: Début d'éxécution d'InitGraph de grapheur.c\n");}
   glutReshapeFunc(GlutReshape); /* fonction appelee qd fenetre redimensionnee */
   glutIdleFunc(GlutIdle);       /* fonction appelee en boucle */
   AppliKey = Key;
@@ -121,6 +129,7 @@ void InitGraph(int ac, char *av[],const char *WinName, const int w, const int h,
   glutDisplayFunc(GlutDraw);
   InitDisplay();
   glutMainLoop();
+  if (mode_debug==1){printf("Debug: Fin d'execution InitGraph de grapheur.c\n");}
 }
 
 /**
@@ -250,6 +259,7 @@ void Cle(int c)
 
 void Dessin()
 {
+  if (mode_debug==1){printf("Debug: Début d'éxécution de Dessin dans grapheur.c\n");}
   glPushMatrix(); /* GL_MODELVIEW is default */
   glScalef(scale_x, offset_x, 1.0);
   glTranslatef(-Translate_x, -Translate_y, 0.0);
@@ -303,7 +313,9 @@ void Dessin()
         glVertex3i(0, 0, 0);
         glVertex3i(0, 1, 0);
   glEnd(); // Fin du tracé*/
+  if (mode_debug==1){printf("Debug: Fin d'execution de Dessin de grapheur.c\n");}
 }
+
 
 /*void Graphe(couple tab[],float minX, float minY,float maxX,float maxY) {
 	boucle i=1{

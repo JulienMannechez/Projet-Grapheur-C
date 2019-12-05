@@ -6,6 +6,8 @@
 #include <GL/glu.h>
 #include "jeton.h"
 
+extern short mode_debug;/* active(1) ou désactive(0) le mode debug */
+
 /**
 * @file Graph.h
 *
