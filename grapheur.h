@@ -38,7 +38,7 @@ extern short mode_debug;/* active(1) ou désactive(0) le mode debug */
 *	 c designant le code ascii de la touche
 *
 */
-void InitGraph(int ac, char *av[], const char *WinName,const int w, const int h, void (*Draw)(void),void (*Key)(int c));
+void InitGraph(/*int ac, char *av[], */const char *WinName,const int w, const int h, void (*Draw)(void),void (*Key)(int c));
 /**
 * line
 *

@@ -20,7 +20,7 @@ float Translate_y;
 short mode_debug;/* active(1) ou désactive(0) le mode debug */
 
 
-int main(int argc, char *argv[]) {
+int main(/*int argc, char *argv[]*/) {
 
     /*Variables nécessaires pour tout le programme */
     int nbr_valeur = 10;
@@ -211,7 +211,7 @@ int main(int argc, char *argv[]) {
 		if (mode_debug==1){printf("Debug: Translate_x= -borne_inf;\n");}
 		Translate_y= -ymin;
 		if (mode_debug==1){printf("Debug: Translate_y= -ymin;\n");}
-    	InitGraph(argc, argv, "Grapheur", 1280, 720, Dessin, Cle);
+    	InitGraph(/*argc, argv, */"Grapheur", 1280, 720, Dessin, Cle);
 	if (mode_debug==1){printf("Debug: InitGraph(argc, argv, \"Grapheur\", 1280, 720, Dessin, Cle);\n");}
 
     }

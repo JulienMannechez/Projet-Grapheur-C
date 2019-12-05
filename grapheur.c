@@ -104,10 +104,14 @@ static void GlutDraw(void)
 * @parma c entier designant le code ascii d'une touche
 *
 */
-void InitGraph(int ac, char *av[],const char *WinName, const int w, const int h, void (*Draw)(void), void (*Key)(int))
+void InitGraph(/*int ac, char *av[],*/const char *WinName, const int w, const int h, void (*Draw)(void), void (*Key)(int))
 {
   if (mode_debug==1){printf("Debug: Début d'éxécution d'InitGraph de grapheur.c\n");}
-  glutInit(&ac, av);
+  //glutInit(&ac, av);
+  //char *myargv[1];
+  //myargv[0]=strdup("Grapheur");
+  //int i = 0;
+  //glutInit(&i, myargv);
   if (mode_debug==1){printf("Debug: Début d'éxécution d'InitGraph de grapheur.c\n");}
   Width = w;
 	  if (mode_debug==1){printf("Debug: Début d'éxécution d'InitGraph de grapheur.c\n");}
