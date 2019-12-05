@@ -9,4 +9,6 @@
 
 typeerreur lexical(char str[], typejeton* tab);
 
+void affichage_tableau_lexical(typejeton t[]);
+
 #endif

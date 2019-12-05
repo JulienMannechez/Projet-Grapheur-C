@@ -2,7 +2,7 @@
 
 typeerreur lexical(char str[], typejeton* tab){
 
-    //Déclaratabions etab initialisation des variables
+    //Dï¿½claratabions etab initialisation des variables
     typeerreur valeur_retour;
     valeur_retour = RAS;
     int i = 0;
@@ -16,13 +16,13 @@ typeerreur lexical(char str[], typejeton* tab){
     int mon_reel = 0;
     int compteur_para = 0;
 
-    //printf("str entrée : %s \n\n",str);
+    //printf("str entrï¿½e : %s \n\n",str);
 
-    //Parcours de la chaine de caractère qu'on reçoit
+    //Parcours de la chaine de caractï¿½re qu'on reï¿½oit
     while(str[i] != '\0'){
 
         switch(str[i]) {
-            //Vérification des caractères que l'on reçoit
+            //Vï¿½rification des caractï¿½res que l'on reï¿½oit
             case '(' :
                 tab[x].lexem = PAR_OUV;
                 x++;
@@ -146,14 +146,14 @@ typeerreur lexical(char str[], typejeton* tab){
         }
 
         //On remplit notre variable reel qui va contenir une chaine de notre valeur
-        //Si la chaine est entre 9 et 0 ou égal à .
+        //Si la chaine est entre 9 et 0 ou ï¿½gal ï¿½ .
         if( ( (int)str[i] >= 48 && (int)str[i] <= 57 ) || (int)str[i] == 46 ) {
             str_reel[k] = str[i];
             k = k + 1;
             str_reel[k] = '\0';
             mon_reel = 1;
         }
-        //Si on a un reel de minimum 1 caractère et que le carac suivant n'est plus un ENTIER ou un point...
+        //Si on a un reel de minimum 1 caractï¿½re et que le carac suivant n'est plus un ENTIER ou un point...
         //on remplit notre typejeton
         if(mon_reel == 1 && ( (int)str[i+1] < 48 || (int)str[i+1] > 57 ) && (int)str[i+1] != 46 ) {
             mon_reel = 0;
@@ -171,7 +171,7 @@ typeerreur lexical(char str[], typejeton* tab){
 
     i = 0;
     while(tab[i].lexem != FIN){
-        // s'il y a bien deux opérandes autour d'un opérateur
+        // s'il y a bien deux opï¿½randes autour d'un opï¿½rateur
         if(tab[i].lexem == OPERATEUR && tab[i].valeur.operateur != MOINS && (tab[i+1].lexem != REEL && tab[i+1].lexem != VARIABLE || tab[i-1].lexem != REEL && tab[i-1].lexem != VARIABLE)) {
             valeur_retour = OPERATEUR_ERROR;
         }
@@ -181,19 +181,19 @@ typeerreur lexical(char str[], typejeton* tab){
         }
         i++;
     }
-    //S'il n'y a pas un nombre de paire de paranthèses, PARA ERROR
+    //S'il n'y a pas un nombre de paire de paranthï¿½ses, PARA ERROR
     if((compteur_para % 2) != 0) {
         valeur_retour = PARA_ERROR;
     }
-    //S'il y a une erreur de syntaxe dans la fonction entré, on retourne FONC_INCONNUE
+    //S'il y a une erreur de syntaxe dans la fonction entrï¿½, on retourne FONC_INCONNUE
     if(strlen(str_fonction) > 1 && chaine_trouvee == 0) {
         valeur_retour = FONC_INCONNUE;
     }
     /*
-    //Sinon, on affiche nos données
+    //Sinon, on affiche nos donnï¿½es
     else if(valeur_retour == RAS) {
         i = 0;
-        //Affichage des données par numéro de la valeur (position dans la structure)
+        //Affichage des donnï¿½es par numï¿½ro de la valeur (position dans la structure)
         while(tab[i].lexem != FIN){
             if(tab[i].lexem == OPERATEUR) {
                 printf("OPERATEUR position : %d \n", tab[i].valeur.operateur);
@@ -202,7 +202,7 @@ typeerreur lexical(char str[], typejeton* tab){
                 printf("FONCTION position : %d \n", tab[i].valeur.fonction);
             }
             else if(tab[i].lexem == REEL) {
-                printf("réel : %f \n",tab[i].valeur.reel);
+                printf("rï¿½el : %f \n",tab[i].valeur.reel);
             }
             else{
                 printf("lexem position : %d \n", tab[i].lexem);
@@ -215,4 +215,29 @@ typeerreur lexical(char str[], typejeton* tab){
     }
 */
     return valeur_retour;
+}
+
+
+void affichage_tableau_lexical(typejeton t[]) {
+
+    int i = 0;
+    while(t[i].lexem != FIN){
+        if(t[i].lexem == OPERATEUR) {
+            printf("operateur position : %d \n", t[i].valeur.operateur);
+        } 
+        else if(t[i].lexem == FONCTION) {
+            printf("fonction position : %d \n", t[i].valeur.fonction);
+        } 
+        else if(t[i].lexem == REEL) {
+            printf("rÃ©el : %f \n",t[i].valeur.reel);
+        } 
+        else{
+            printf("lexem position : %d \n", t[i].lexem);
+        }
+        i++;  
+    }
+    if(t[i].lexem == FIN) {
+        printf("FIN\n");
+    }
+    
 }

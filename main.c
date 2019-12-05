@@ -1,6 +1,4 @@
 #include "jeton.h"
-
-//rajout julien T : enlève 75% des warnings, à creuser
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -8,14 +6,13 @@
 #include "syntaxique.h"
 #include "lexical.h"
 #include "evaluateur.h"
-#include "grapheur.h"
-//Fin rajout julien T 
+//#include "grapheur.h"
 
 int main() {
 
     //Tableau de jeton (lexem, valeur)
     typejeton* tab = (typejeton*)malloc(50*sizeof(typejeton));
-    //On r�cup�re notre valeur de retour pour la fonction lexical
+    //On récupére notre valeur de retour pour la fonction lexical
     typeerreur valeur_retour;
 
     char str[50];
@@ -37,20 +34,42 @@ int main() {
             continue;
         }
         else if(valeur_retour == OPERATEUR_ERROR){
-            printf("Op�rateur sans ses deux op�randes autour.\n");
+            printf("Opérateur sans ses deux opérandes autour.\n");
             continue;
         }
         else if(valeur_retour == VARIABLE_ERROR){
-            printf("Probl�mes de variables.\n");
+            printf("Problèmes de variables.\n");
             continue;
         }
 
-        int i = 0;
+        //affichage du tableau
+        printf("\nAffichage du tableau de la partie 1\n");
+        affichage_tableau_lexical(tab);
         
+        printf("\nAffichage de la construction de l'arbre partie 2\n");
+        int i=0;
         /* Commenté par JT pour tester avec un arbre manuel*/
         Arbre monArbre;
         monArbre = syntaxe(tab, &i);
+        printf("i : %d\n",i);
 
+        printf("Lexem racine de l'arbre : %d\n",monArbre->jeton.lexem);
+        printf("valeur racine de l'arbre : %f\n\n",monArbre->jeton.valeur.reel);
+
+        if(monArbre->pjeton_preced!= NULL){
+            printf("Lexem gauche de l'arbre : %d\n",monArbre->pjeton_preced->jeton.lexem);
+            printf("valeur reel gauche de l'arbre : %f\n",monArbre->pjeton_preced->jeton.valeur.reel);
+        }else{
+            printf("pj preced NULL \n");
+        }
+        
+        if(monArbre->pjeton_suiv!= NULL){
+            printf("Lexem droite de l'arbre : %d\n",monArbre->pjeton_suiv->jeton.lexem);
+        }else{
+            printf("pj suivant NULL \n");
+        }
+        printf("\nFIN Affichage de la construction de l'arbre partie 2\n\n");
+        
         //possibilité d'afficher l'arbre reçu ?
         /* Fin Commenté par JT pour tester avec un arbre manuel*/
 
@@ -96,7 +115,7 @@ int main() {
         
         //float x = 3;
         float z = 0;
-        z = evaluer(monArbre, 2);
+        z = evaluer(monArbre, 4);
         printf("voila la valeur z : %f\n\n\n",z);//affichage du r�sultat
 
         /* Commenté par JT - le résultat n'est pas bon meme avec l'arbre fait en manuel*/
@@ -127,7 +146,6 @@ int main() {
 
         // affichage du tableau
         affiche_tab_couple(tab_valeur, nbr_valeur);
-
 
         printf("\n");
     }
