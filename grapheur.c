@@ -10,7 +10,7 @@
 
 static int WindowNumber;
 static int Width, Height;
-static void (*AppliDraw)(void);
+static void (*AppliDraw)(Couple*);
 static void (*AppliKey)(int);
 
 /**
