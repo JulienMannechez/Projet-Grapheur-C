@@ -21,6 +21,6 @@ int main(int argc, char *argv[])
 	scale_x= 1.0 / (Xmax - Xmin);
 	Translate_x= -Xmin;
 	Translate_y= -Ymin;
-    InitGraph(argc, argv, "Grapheur", 1280, 720, Dessin(tab), Cle, tab);
+    InitGraph(argc, argv, "Grapheur", 1280, 720, Dessin, Cle);
     return 0;
 }
