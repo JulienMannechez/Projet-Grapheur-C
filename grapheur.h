@@ -6,8 +6,6 @@
 #include <GL/glu.h>
 #include "jeton.h"
 
-extern short mode_debug;/* active(1) ou désactive(0) le mode debug */
-
 /**
 * @file Graph.h
 *
@@ -38,7 +36,7 @@ extern short mode_debug;/* active(1) ou désactive(0) le mode debug */
 *	 c designant le code ascii de la touche
 *
 */
-void InitGraph(/*int ac, char *av[], */const char *WinName,const int w, const int h, void (*Draw)(void),void (*Key)(int c));
+void InitGraph(int ac, char *av[], const char *WinName,const int w, const int h, void (*Draw)(void),void (*Key)(int c));
 /**
 * line
 *
@@ -122,7 +120,7 @@ void outtextxy(const float x, const float y, const char *s);
 
 
 
-extern Couple tab[2000];
+extern Couple tab_valeur[2000];
 /*
 const int Xmin = 0;
 const int Xmax = (sizeof(tab) / 8) * 0.1;

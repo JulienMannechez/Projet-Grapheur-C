@@ -104,27 +104,15 @@ static void GlutDraw(void)
 * @parma c entier designant le code ascii d'une touche
 *
 */
-void InitGraph(/*int ac, char *av[],*/const char *WinName, const int w, const int h, void (*Draw)(void), void (*Key)(int))
+void InitGraph(int ac, char *av[],const char *WinName, const int w, const int h, void (*Draw)(void), void (*Key)(int))
 {
-  if (mode_debug==1){printf("Debug: Début d'éxécution d'InitGraph de grapheur.c\n");}
-  //glutInit(&ac, av);
-  //char *myargv[1];
-  //myargv[0]=strdup("Grapheur");
-  //int i = 0;
-  //glutInit(&i, myargv);
-  if (mode_debug==1){printf("Debug: Début d'éxécution d'InitGraph de grapheur.c\n");}
+  glutInit(&ac, av);
   Width = w;
-	  if (mode_debug==1){printf("Debug: Début d'éxécution d'InitGraph de grapheur.c\n");}
   Height = h;
-  if (mode_debug==1){printf("Debug: Début d'éxécution d'InitGraph de grapheur.c\n");}
   glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-  if (mode_debug==1){printf("Debug: Début d'éxécution d'InitGraph de grapheur.c\n");}
   glutInitWindowPosition(0, 0);
-  if (mode_debug==1){printf("Debug: Début d'éxécution d'InitGraph de grapheur.c\n");}
   glutInitWindowSize(Width, Height);
-  if (mode_debug==1){printf("Debug: Début d'éxécution d'InitGraph de grapheur.c\n");}
   WindowNumber = glutCreateWindow(WinName);
-  if (mode_debug==1){printf("Debug: Début d'éxécution d'InitGraph de grapheur.c\n");}
   glutReshapeFunc(GlutReshape); /* fonction appelee qd fenetre redimensionnee */
   glutIdleFunc(GlutIdle);       /* fonction appelee en boucle */
   AppliKey = Key;
@@ -133,7 +121,6 @@ void InitGraph(/*int ac, char *av[],*/const char *WinName, const int w, const in
   glutDisplayFunc(GlutDraw);
   InitDisplay();
   glutMainLoop();
-  if (mode_debug==1){printf("Debug: Fin d'execution InitGraph de grapheur.c\n");}
 }
 
 /**
@@ -263,61 +250,18 @@ void Cle(int c)
 
 void Dessin()
 {
-  if (mode_debug==1){printf("Debug: Début d'éxécution de Dessin dans grapheur.c\n");}
   glPushMatrix(); /* GL_MODELVIEW is default */
-  glScalef(scale_x, offset_x, 1.0);
+  glScalef(scale_x, offset_x, 1.0); //regle ec
   glTranslatef(-Translate_x, -Translate_y, 0.0);
   glColor3f(1.0, 0.0, 0.0);
   glClearColor(1.0, 1.0, 1.0, 0.0);
   glClear(GL_COLOR_BUFFER_BIT);
   glBegin(GL_LINE_STRIP);
-  for (int i = 0; i < sizeof(tab) / 8 - 1; i++)
+  for (int i = 0; i < sizeof(tab_valeur) / 8 - 1; i++)
   {
-    line(tab[i].x, tab[i].y, tab[i + 1].x, tab[i + 1].y);
+    line(tab_valeur[i].x, tab_valeur[i].y, tab_valeur[i + 1].x, tab_valeur[i + 1].y);
   }
-  /*setcolor(1.0F,1.0F,1.0F);
-	line(-1.0,-1.0,1.0,1.0);
-	static void GlutKey(const unsigned char c, const int x, const int y)
-{
-  switch (c)
-  {
-  default:
-    if (AppliKey)
-      (*AppliKey)(c);
-    break;
-  }
-  glutPostRedisplay();
-}
-	setcolor(1.0F,1.0F,0.0F);
-	outtextxy(0.0,0.0,"Text");
-  if (bascule) {
-		setcolor(1.0F,0.0F,0.0F);
-		bar(-0.5F,-0.5F,0.5F,0.5F);
-	}
-	setcolor(1.0F,1.0F,1.0F);*/
-
-  /*//Cadre
-	line(-0.90,-0.90,0.90,-0.90);
-	//setcolor(1.0F,1.0F,1.0F);
-	line(-0.90,-0.90,-0.90,0.90);
-	line(-0.90,0.90,0.90,0.90);
-	line(0.90,0.90,0.90,-0.90);
-
-	//Croix centrale
-	line(0.0,0.90,0.0,-0.90);
-	line(0.90,0.0,-0.90,0.0);*/
-
-  /*glBegin(GL_LINES);      // On trace les 3 axes dans des couleurs différentes
- 
-        glColor3ub(255, 0, 0);    // Axe X en rouge
-        glVertex3i(0,0, 0);
-        glVertex3i(1,0, 0);
- 
-        glColor3ub(0, 255, 0);    // Axe Y en vert
-        glVertex3i(0, 0, 0);
-        glVertex3i(0, 1, 0);
   glEnd(); // Fin du tracé*/
-  if (mode_debug==1){printf("Debug: Fin d'execution de Dessin de grapheur.c\n");}
 }
 
 

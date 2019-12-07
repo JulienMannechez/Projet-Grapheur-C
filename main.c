@@ -11,16 +11,15 @@
 #include "evaluateur.h"
 #include "grapheur.h"
 
-Couple tab[2000];
+Couple tab_valeur[2000];
 float offset_x;
 float scale_x;
 float Translate_x;
 float Translate_y;
 
-short mode_debug;/* active(1) ou désactive(0) le mode debug */
 
 
-int main(/*int argc, char *argv[]*/) {
+int main(int argc, char *argv[]) {
 
     /*Variables nécessaires pour tout le programme */
     int nbr_valeur = 10;
@@ -28,7 +27,6 @@ int main(/*int argc, char *argv[]*/) {
     float borne_sup=0;
     float ymin=0;
     float ymax=0;
-    mode_debug=1;
     short mode_debug_main=0;/* active(1) ou désactive(0) le mode debug */
 
     /*#####################################################################
@@ -175,12 +173,6 @@ int main(/*int argc, char *argv[]*/) {
             printf("\nBorne inf et sup : %f - %f \n",borne_inf, borne_sup);
         }
         
-        // On définit le nombre de valeurs à évaluer
-        // voir si le graphique nous permettra de le demander à l'utilisateur par la suite
-        nbr_valeur = 10;
-
-        //On déclare un tableau de couples avec nbr_valeur
-        Couple tab_valeur[nbr_valeur];
 
         ymin=0;
         ymax=0;
@@ -202,20 +194,11 @@ int main(/*int argc, char *argv[]*/) {
                       Partie 4 - Grapheur
             Traçage de la courbe 
         #####################################################################*/
-	if (mode_debug==1){printf("Debug: Debut d'éxécution de la partie 4\n");}
         offset_x= 1.0 / (ymax - ymin);
-	if (mode_debug==1){printf("Debug: offset_x= 1.0 / (ymax - ymin);\n");}
 		scale_x= 1.0 / (borne_inf - borne_sup);
-		if (mode_debug==1){printf("Debug: scale_x= 1.0 / (borne_inf - borne_sup);\n");}
 		Translate_x= -borne_inf;
-		if (mode_debug==1){printf("Debug: Translate_x= -borne_inf;\n");}
 		Translate_y= -ymin;
-		if (mode_debug==1){printf("Debug: Translate_y= -ymin;\n");}
-    	InitGraph(/*argc, argv, */"Grapheur", 1280, 720, Dessin, Cle);
-	if (mode_debug==1){printf("Debug: InitGraph(argc, argv, \"Grapheur\", 1280, 720, Dessin, Cle);\n");}
-
+    	InitGraph(argc, argv, "Grapheur", 1280, 720, Dessin, Cle);
     }
-
-    if (mode_debug==1){printf("Debug: return 0;\n");}
     return 0;
 }
