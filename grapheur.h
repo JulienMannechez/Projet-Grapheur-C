@@ -5,6 +5,7 @@
 #include <GL/glut.h>
 #include <GL/glu.h>
 #include "jeton.h"
+#define nbr_valeur 2000
 
 /**
 * @file grapheur.h
@@ -115,7 +116,7 @@ void outtextxy(const float x, const float y, const char *s);
 
 
 //déclaration des variables globales
-extern Couple tab_valeur[2000];
+extern Couple tab_valeur[nbr_valeur];
 extern float offset;
 extern float scale;
 extern float Translate_x;

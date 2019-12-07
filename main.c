@@ -11,7 +11,7 @@
 #include "evaluateur.h"
 #include "grapheur.h"
 
-Couple tab_valeur[2000];
+Couple tab_valeur[nbr_valeur];
 float offset;
 float scale;
 float Translate_x;
@@ -22,7 +22,6 @@ float Translate_y;
 int main(int argc, char *argv[]) {
 
     /*Variables nécessaires pour tout le programme */
-    int nbr_valeur = 10;
     float borne_inf=0;
     float borne_sup=0;
     float ymin=0;
