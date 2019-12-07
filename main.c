@@ -12,8 +12,8 @@
 #include "grapheur.h"
 
 Couple tab_valeur[2000];
-float offset_x;
-float scale_x;
+float offset;
+float scale;
 float Translate_x;
 float Translate_y;
 
@@ -194,10 +194,14 @@ int main(int argc, char *argv[]) {
                       Partie 4 - Grapheur
             Traçage de la courbe 
         #####################################################################*/
-        offset_x= 1.0 / (ymax - ymin);
-		scale_x= 1.0 / (borne_inf - borne_sup);
+        //Initialisation de l'offset
+        offset= 1.0 / (ymax - ymin);
+        //Initialisation de l'échelle
+		scale= 1.0 / (borne_inf - borne_sup);
+        //Initialisation de la position
 		Translate_x= -borne_inf;
 		Translate_y= -ymin;
+        //Dessin de la courbe
     	InitGraph(argc, argv, "Grapheur", 1280, 720, Dessin, Cle);
     }
     return 0;

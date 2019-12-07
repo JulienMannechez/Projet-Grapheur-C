@@ -1,11 +1,8 @@
 #include "grapheur.h"
 
 /**
-* @file Graph.cpp
-*
-* @brief pr�sente les quelques fonctionnalit�s n�cessaires dans le cadre de ce projet
-* Il contient la d�finition des m�thodes utilis�es
-*
+* @file grapheur.c
+* Traçage,zoom et position de la courbe
 */
 
 static int WindowNumber;
@@ -16,7 +13,7 @@ static void (*AppliKey)(int);
 /**
 * GlutReshape
 *
-* Cette proc�dure permet de gerer la taille de la fenetre quand (redimensionn�e)
+* Cette procèdure permet de gérer la taille de la fenêtre quand redimensionnée
 *
 * @parma w largeur de la fenetre gl
 * @parma h hauteur de la fenetre gl
@@ -61,7 +58,7 @@ static void Begin2DDisplay(void)
 
 static void End2DDisplay(void)
 {
-  /* Fin du trace, retour au parametres normaux */
+  /* Fin du tracé, retour aux paramètres normaux */
   glMatrixMode(GL_PROJECTION);
   glPopMatrix();
   glMatrixMode(GL_MODELVIEW);
@@ -89,19 +86,19 @@ static void GlutDraw(void)
 /**
 * InitGraph
 *
-* Procedure d'initialisation de la fenetre et de l'environement OpenGL 
-* L'initialisation de GLUT se trouve dans la procedure
-* principale, elle necessite l'emploie des argument de
+* Procédure d'initialisation de la fenêtre et de l'environement OpenGL 
+* L'initialisation de GLUT se trouve dans la procédure
+* principale, elle nécessite l'emploi des arguments de
 * la ligne de commande 
 *
 * @parma ac
 * @parma av[]
-* @parma WinName definit le nom (titre) de la fentre d'affichage
-* @parma w definit la largeur de la fenetre
-* @parma h definit la hauteur de la fenetre
-* @parma Draw d�finit une m�thode de tra�age 
-* @parma Key d�finit une m�thode permettant la d�tection des touche du clavier 
-* @parma c entier designant le code ascii d'une touche
+* @parma WinName definit le nom (titre) de la fenêtre d'affichage
+* @parma w définit la largeur de la fenêtre
+* @parma h definit la hauteur de la fenêtre
+* @parma Draw définit une méthode de traçage 
+* @parma Key définit une méthode permettant la détection des touches du clavier 
+* @parma c entier désignant le code ascii d'une touche
 *
 */
 void InitGraph(int ac, char *av[],const char *WinName, const int w, const int h, void (*Draw)(void), void (*Key)(int))
@@ -113,8 +110,8 @@ void InitGraph(int ac, char *av[],const char *WinName, const int w, const int h,
   glutInitWindowPosition(0, 0);
   glutInitWindowSize(Width, Height);
   WindowNumber = glutCreateWindow(WinName);
-  glutReshapeFunc(GlutReshape); /* fonction appelee qd fenetre redimensionnee */
-  glutIdleFunc(GlutIdle);       /* fonction appelee en boucle */
+  glutReshapeFunc(GlutReshape); /* fonction appelée quand la fenêtre est redimensionnée */
+  glutIdleFunc(GlutIdle);       /* fonction appelée en boucle */
   AppliKey = Key;
   glutKeyboardFunc(GlutKey);
   AppliDraw = Draw;
@@ -126,7 +123,7 @@ void InitGraph(int ac, char *av[],const char *WinName, const int w, const int h,
 /**
 * setcolor
 *
-* Cette proc�dure permet de definire une couleur par ces trois composantes   
+* Cette procédure permet de définir une couleur par ces trois composantes   
 *
 * @parma r composante du plan rouge
 * @parma v composante du plan vert
@@ -141,12 +138,12 @@ void setcolor(const float r, const float v, const float b)
 /**
 * line
 *
-* Cette proc�dure permet de tracher une ligne entre deux points (x0, y0) et (x1,y1) 
+* Cette procédure permet de tracer une ligne entre deux points (x0, y0) et (x1,y1) 
 *
 * @parma x0 abscisse 1er point
-* @parma y0 ordonn�e 1er point
-* @parma x0 abscisse 2eme point
-* @parma y0 ordonn�e 2eme point
+* @parma y0 ordonnée 1er point
+* @parma x0 abscisse 2ème point
+* @parma y0 ordonnée 2ème point
 *
 */
 void line(const float x0, const float y0, const float x1, const float y1)
@@ -159,8 +156,6 @@ void line(const float x0, const float y0, const float x1, const float y1)
 
 /**
 * beginlines
-*
-* Cette proc�dure permet 
 *
 * @parma x0
 * @parma y0
@@ -195,11 +190,11 @@ void bar(const float x0, const float y0, const float x1, const float y1)
 /**
 * outtextxy
 *
-* Cette proc�dure permet d'ecrit une chaine de charact�re s dans une zone de texte d�finie par les coordonn�es x et y
+* Cette procédure permet d'écrire une chaîne de caractère dans une zone de texte d�finie par les coordonnées x et y
 *
-* @parma x abscisse du point (coint gauche superieur) de la zone de texte 
-* @parma y ordonn�e du point (coint gauche superieur) de la zone de texte 
-* @parma s tableau de charct�res 
+* @parma x abscisse du point (coint gauche supérieur) de la zone de texte 
+* @parma y ordonnée du point (coint gauche supérieur) de la zone de texte 
+* @parma s tableau de caractères 
 *
 */
 void outtextxy(const float x, const float y, const char *str)
@@ -213,32 +208,32 @@ void outtextxy(const float x, const float y, const char *str)
   }
 }
 
-void Cle(int c)
+void Cle(int c)//Fonction qui gère les entrées clavier (réglage zoom, offset et position)
 {
   switch (c)
   {
+  //réglage de l'offest
   case 'q':
-    offset_x -= 0.1;
+    offset -= 0.1;
     break;
   case 'd':
-    offset_x += 0.1;
+    offset += 0.1;
     break;
+  //réglage du zoom
   case 'z':
-    scale_x *= 1.5;
+    scale *= 1.5;
     break;
   case 's':
-    scale_x /= 1.5;
+    scale /= 1.5;
     break;
-  /*case 'r':
-    offset_x = 1.0 / (Ymax - Ymin);
-    scale_x = 1.0 / (Xmax - Xmin);
-    break;*/
+  //réglage de la position axe horizontal
   case 'j':
     Translate_x += 0.1;
     break;
   case 'l':
     Translate_x -= 0.1;
     break;
+  //réglage de la position axe vertical
   case 'i':
     Translate_y += 0.1;
     break;
@@ -248,26 +243,26 @@ void Cle(int c)
   }
 }
 
-void Dessin()
+void Dessin()//Fonction qui dessine la courbe
 {
   glPushMatrix(); /* GL_MODELVIEW is default */
-  glScalef(scale_x, offset_x, 1.0); //regle ec
+  //réglage du zoom et de l'offset
+  glScalef(scale, offset, 1.0);
+  //réglage de la position
   glTranslatef(-Translate_x, -Translate_y, 0.0);
+  //colorise le fond en blanc et la courbe en rouge
   glColor3f(1.0, 0.0, 0.0);
   glClearColor(1.0, 1.0, 1.0, 0.0);
   glClear(GL_COLOR_BUFFER_BIT);
+
+  //trace la courbe
   glBegin(GL_LINE_STRIP);
-  for (int i = 0; i < sizeof(tab_valeur) / 8 - 1; i++)
+  //parcours des couples x,y
+  for (int i = 0; i < (sizeof(tab_valeur) / 8)-1; i++)
   {
+    //relie entre eux les differents points de la courbe
     line(tab_valeur[i].x, tab_valeur[i].y, tab_valeur[i + 1].x, tab_valeur[i + 1].y);
   }
-  glEnd(); // Fin du tracé*/
+  glEnd(); 
+  // Fin du tracé*/
 }
-
-
-/*void Graphe(couple tab[],float minX, float minY,float maxX,float maxY) {
-	boucle i=1{
-			line(tab[i].x,tab[i].y,$j,tab[i+1].x,tab[i+1].y);
-			i+1;
-	}
-}*/
