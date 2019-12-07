@@ -254,7 +254,6 @@ void Dessin()//Fonction qui dessine la courbe
   glColor3f(1.0, 0.0, 0.0);
   glClearColor(1.0, 1.0, 1.0, 0.0);
   glClear(GL_COLOR_BUFFER_BIT);
-
   //trace la courbe
   glBegin(GL_LINE_STRIP);
   //parcours des couples x,y

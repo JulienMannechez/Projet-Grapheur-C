@@ -196,7 +196,7 @@ int main(int argc, char *argv[]) {
         //Initialisation de l'offset
         offset= 1.0 / (ymax - ymin);
         //Initialisation de l'échelle
-		scale= 1.0 / (borne_inf - borne_sup);
+		scale= 1.0 / (borne_sup - borne_inf);
         //Initialisation de la position
 		Translate_x= -borne_inf;
 		Translate_y= -ymin;
