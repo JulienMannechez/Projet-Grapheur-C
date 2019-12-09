@@ -221,24 +221,24 @@ void Cle(int c)//Fonction qui gère les entrées clavier (réglage zoom, offset 
     break;
   //réglage du zoom
   case 'z':
-    scale += 0.001;
+    scale *= 1.01;
     break;
   case 's':
-    scale -= 0.001;
+    scale /= 1.01;
     break;
   //réglage de la position axe horizontal
   case 'j':
-    Translate_x += 0.1;
+    Translate_x += 0.3;
     break;
   case 'l':
-    Translate_x -= 0.1;
+    Translate_x -= 0.3;
     break;
   //réglage de la position axe vertical
-  case 'i':
-    Translate_y += 0.1;
-    break;
   case 'k':
-    Translate_y -= 0.1;
+    Translate_y += 0.3;
+    break;
+  case 'i':
+    Translate_y -= 0.3;
     break;
   }
 }
