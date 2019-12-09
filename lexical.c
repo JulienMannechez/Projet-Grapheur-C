@@ -32,6 +32,7 @@ typeerreur lexical(char str[], typejeton* tab){
                 tab[x].lexem = PAR_FERM;
                 x++;
                 compteur_para++;
+
                 break;
             case '+' :
                 tab[x].lexem = OPERATEUR;
@@ -67,79 +68,80 @@ typeerreur lexical(char str[], typejeton* tab){
 
             default :
                 //Si la chaine est entre A et Z ou a et z ou _
-                if((( ((int)str[i] >= 65) && ((int)str[i] <= 90)) || ( ((int)str[i] >= 97) && ((int)str[i] <= 122)) ) || ((int)str[i] == 95) ) {
+                if(((((int)str[i] >= 65) && ((int)str[i] <= 90)) || ( ((int)str[i] >= 97) && ((int)str[i] <= 122)) ) || ((int)str[i] == 95) ) {
                     str_fonction[j] = toupper(str[i]);
                     j++;
                     str_fonction[j] = '\0';
+                    chaine_trouvee = 0;
                 }
                 if(chaine_trouvee == 0 && strcmp(str_fonction,"ABS") == 0){
                     j = 0;
                     tab[x].lexem = FONCTION;
                     tab[x].valeur.fonction = ABS;
-                    chaine_trouvee = 1;
+                    chaine_trouvee++;
                     x++;
                 }
                 else if(chaine_trouvee == 0 && strcmp(str_fonction,"SIN") == 0){
                     j = 0;
                     tab[x].lexem = FONCTION;
                     tab[x].valeur.fonction = SIN;
-                    chaine_trouvee = 1;
+                    chaine_trouvee++;
                     x++;
                 }
                 else if(chaine_trouvee == 0 && strcmp(str_fonction,"SQRT") == 0){
                     j = 0;
                     tab[x].lexem = FONCTION;
                     tab[x].valeur.fonction = SQRT;
-                    chaine_trouvee = 1;
+                    chaine_trouvee++;
                     x++;
                 }
                 else if(chaine_trouvee == 0 && strcmp(str_fonction,"LOG") == 0){
                     j = 0;
                     tab[x].lexem = FONCTION;
                     tab[x].valeur.fonction = LOG;
-                    chaine_trouvee = 1;
+                    chaine_trouvee++;
                     x++;
                 }
                 else if(chaine_trouvee == 0 && strcmp(str_fonction,"COS") == 0){
                     j = 0;
                     tab[x].lexem = FONCTION;
                     tab[x].valeur.fonction = COS;
-                    chaine_trouvee = 1;
+                    chaine_trouvee++;
                     x++;
                 }
                 else if(chaine_trouvee == 0 && strcmp(str_fonction,"TAN") == 0){
                     j = 0;
                     tab[x].lexem = FONCTION;
                     tab[x].valeur.fonction = TAN;
-                    chaine_trouvee = 1;
+                    chaine_trouvee++;
                     x++;
                 }
                 else if(chaine_trouvee == 0 && strcmp(str_fonction,"EXP") == 0){
                     j = 0;
                     tab[x].lexem = FONCTION;
                     tab[x].valeur.fonction = EXP;
-                    chaine_trouvee = 1;
+                    chaine_trouvee++;
                     x++;
                 }
                 else if(chaine_trouvee == 0 && strcmp(str_fonction,"ENTIER") == 0){
                     j = 0;
                     tab[x].lexem = FONCTION;
                     tab[x].valeur.fonction = ENTIER;
-                    chaine_trouvee = 1;
+                    chaine_trouvee++;
                     x++;
                 }
                 else if(chaine_trouvee == 0 && strcmp(str_fonction,"VAL_NE") == 0){
                     j = 0;
                     tab[x].lexem = FONCTION;
                     tab[x].valeur.fonction = VAL_NEG;
-                    chaine_trouvee = 1;
+                    chaine_trouvee++;
                     x++;
                 }
                 else if(chaine_trouvee == 0 && strcmp(str_fonction,"SINC") == 0){
                     j = 0;
                     tab[x].lexem = FONCTION;
                     tab[x].valeur.fonction = SINC;
-                    chaine_trouvee = 1;
+                    chaine_trouvee++;
                     x++;
                 }
 
@@ -147,7 +149,9 @@ typeerreur lexical(char str[], typejeton* tab){
 
         //On remplit notre variable reel qui va contenir une chaine de notre valeur
         //Si la chaine est entre 9 et 0 ou �gal � .
-        if( ( (int)str[i] >= 48 && (int)str[i] <= 57 ) || (int)str[i] == 46 ) {
+        if( ( (int)str[i] >=
+         48 && (int)str[i] <= 57 ) || (int)str[i] == 46 ) {
+    
             str_reel[k] = str[i];
             k = k + 1;
             str_reel[k] = '\0';
@@ -155,7 +159,9 @@ typeerreur lexical(char str[], typejeton* tab){
         }
         //Si on a un reel de minimum 1 caract�re et que le carac suivant n'est plus un ENTIER ou un point...
         //on remplit notre typejeton
-        if(mon_reel == 1 && ( (int)str[i+1] < 48 || (int)str[i+1] > 57 ) && (int)str[i+1] != 46 ) {
+        if(mon_reel == 1 && 
+        ( (int)str[i+1] < 48 || (int)str[i+1] > 57 ) && (int)str[i+1] != 46 ) {
+    
             mon_reel = 0;
             tab[x].lexem = REEL;
             tab[x].valeur.reel = atof(str_reel);
@@ -172,7 +178,7 @@ typeerreur lexical(char str[], typejeton* tab){
     i = 0;
     while(tab[i].lexem != FIN){
         // s'il y a bien deux op�randes autour d'un op�rateur
-        if(tab[i].lexem == OPERATEUR && tab[i].valeur.operateur != MOINS && (tab[i+1].lexem != REEL && tab[i+1].lexem != VARIABLE || tab[i-1].lexem != REEL && tab[i-1].lexem != VARIABLE)) {
+        if(tab[i].lexem == OPERATEUR && tab[i].valeur.operateur != MOINS && (tab[i+1].lexem != FONCTION && tab[i+1].lexem != REEL && tab[i+1].lexem != VARIABLE || tab[i-1].lexem != PAR_FERM && tab[i-1].lexem != REEL && tab[i-1].lexem != VARIABLE)) {
             valeur_retour = OPERATEUR_ERROR;
         }
         // s'il n'y a pas deux variables a la suite

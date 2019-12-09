@@ -7,10 +7,10 @@ Arbre createArbre(typejeton tj, Arbre A, Arbre B){
     resultat->jeton.lexem=tj.lexem;
     if (tj.lexem==REEL)
     {   
-        printf("creer arbre reel - tj.valeur.reel : %f\n\n",tj.valeur.reel);
+        //printf("creer arbre reel - tj.valeur.reel : %f\n\n",tj.valeur.reel);
         resultat->jeton.valeur=tj.valeur;
         resultat->jeton.valeur.reel=tj.valeur.reel;
-        printf("creer arbre reel - resultat->jeton.valeur.reel : %f\n\n",resultat->jeton.valeur.reel);
+        //printf("creer arbre reel - resultat->jeton.valeur.reel : %f\n\n",resultat->jeton.valeur.reel);
 
     }else
     {
@@ -29,6 +29,7 @@ Arbre syntaxe(typejeton* tab , int* i){
     A = (Arbre)malloc(sizeof(struct Node));
     temp = (Arbre)malloc(sizeof(struct Node));
     newA = (Arbre)malloc(sizeof(struct Node));
+    int compteur_par_ouv = 1;
     int indice_tab;
     ////printf("%d", *i);
     while (tab[*i].lexem != FIN){
@@ -45,12 +46,8 @@ Arbre syntaxe(typejeton* tab , int* i){
                 }else{*/
                     newA = createArbre(tab[*i], NULL, NULL);
                     printf("REEL %d \n",*i);
-                    printf("valeur reel dans l'arbre : %f\n",newA->jeton.valeur.reel);
-                    if(tab[*i+1].lexem!= PAR_FERM){
-                        *i = *i +1;
-                    }else{
-                        *i = *i +2;
-                    }
+                    //printf("valeur reel dans l'arbre : %f\n",newA->jeton.valeur.reel);
+                    *i = *i + 1;
 
                // }
                 break;
@@ -67,13 +64,7 @@ Arbre syntaxe(typejeton* tab , int* i){
                 }else{*/
                     newA = createArbre(tab[*i], NULL, NULL);
                     printf("VAR %d\n",*i);
-                    if(tab[*i+1].lexem!= PAR_FERM){
-                        *i = *i +1;
-                    }else{
-                        *i = *i +2;
-                    }
-
-
+                    *i = *i +1;
                 //}
                 break;
 
@@ -98,27 +89,53 @@ Arbre syntaxe(typejeton* tab , int* i){
                     temp = syntaxe(tab, &indice_tab);
                     newA = createArbre(tab[*i],newA,temp);
                     printf("OPE %d\n",*i);
-                    *i= *i+2;
+                    if(tab[*i+3].lexem == PAR_FERM){
+                        *i = *i + 3;
+                    }else{
+                        *i = *i+2;
+                    }
+                    
 
                 //}
                 break;
 
             case FONCTION:
-                if(tab[*i+1].lexem != PAR_OUV){
-                    typejeton* tj = (typejeton*)malloc(sizeof(typejeton));
-                    tj->lexem=ERREUR;
-                    tj->valeur.reel=204;
-                    newA=createArbre(*tj,NULL,NULL);
-                    *i = *i +1;
+                // if(tab[*i+1].lexem != PAR_OUV){
+                //     typejeton* tj = (typejeton*)malloc(sizeof(typejeton));
+                //     tj->lexem=ERREUR;
+                //     tj->valeur.reel=204;
+                //     newA=createArbre(*tj,NULL,NULL);
+                //     *i = *i +1;
 
-                }else{
-                    int* j = (int*)malloc(sizeof(int));
+                // }else
+                {
+                    int*  j = (int*)malloc(sizeof(int));
                     *j = *i + 1;
-                    ////printf("%d",*i);
+                    //printf("%d",*i);
                     temp = syntaxe(tab, j);
                     newA = createArbre(tab[*i], temp, NULL);
                     printf("FONC %d\n",*i);
-                    *i = *i+6;
+                    int k = *j+1;
+
+                    //Voir pour cos(sin(2+x))
+                    if(tab[k].lexem == FONCTION){   
+                        while(tab[k].lexem != PAR_FERM && compteur_par_ouv!=1){
+                            k++;
+                            if(tab[k].lexem == PAR_OUV){
+                                compteur_par_ouv++;
+                            }
+                            if(tab[k].lexem == PAR_FERM && compteur_par_ouv > 1){
+                                compteur_par_ouv--;
+                            }
+                            printf("%d", compteur_par_ouv);
+                        }
+                        *i = k;
+                    }
+                    if(tab[*i+5].lexem == PAR_FERM){
+                        *i=*i+6;
+                    }else if(tab[*i+3].lexem == PAR_FERM){
+                        *i=*i+4;
+                    }
                 }
                 break;
 
