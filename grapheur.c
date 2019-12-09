@@ -251,9 +251,8 @@ void Dessin()//Fonction qui dessine la courbe
   glScalef(scale, offset, 1.0);
   //réglage de la position
   glTranslatef(-Translate_x, -Translate_y, 0.0);
-  //colorise le fond en blanc et la courbe en rouge
-  glColor3f(1.0, 0.0, 0.0);
-  glClearColor(1.0, 1.0, 1.0, 0.0);
+  glColor3f(0.0, 0.0, 0.0); //Colorise les axes en noir
+  glClearColor(1.0, 1.0, 1.0, 0.0); //Colorise le fond en blanc
   glClear(GL_COLOR_BUFFER_BIT);
   //trace la courbe
   
@@ -264,12 +263,13 @@ void Dessin()//Fonction qui dessine la courbe
           glVertex2d(1000,0);      
           /* Axe des Y */
           glVertex2d(0,-1000);
-          glVertex2d(0,1000);      
+          glVertex2d(0,1000);
   glEnd();
   /*Ajout Julien T pour tracer les axes X et Y */
 
 
   glBegin(GL_LINE_STRIP);
+  glColor3f(1.0, 0.0, 0.0); //Colorise la courbe en rouge
   //parcours des couples x,y
   for (int i = 0; i < (sizeof(tab_valeur) / 8)-1; i++)
   {
