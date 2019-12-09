@@ -17,15 +17,17 @@ float scale;
 float Translate_x;
 float Translate_y;
 
-
-
-int main(int argc, char *argv[]) {
+//int main() {// pour partie normale
+int main(int argc, char** argv){//pour grapheur
+    
 
     /*Variables nécessaires pour tout le programme */
+    //int nbr_valeur = 10;//passage en global
     float borne_inf=0;
     float borne_sup=0;
     float ymin=0;
     float ymax=0;
+
     short mode_debug_main=0;/* active(1) ou désactive(0) le mode debug */
 
     /*#####################################################################
@@ -43,7 +45,7 @@ int main(int argc, char *argv[]) {
         printf("\nEntrez une formule (quit pour arreter) : ");
         scanf("%s", str);
         if(strcmp(str, "quit") == 0) {
-            printf("\naurevoir. \n"); //Giscard D'estaing
+            printf("\naurevoir. \n");
             continue;
         }
         printf("\n");
@@ -100,48 +102,6 @@ int main(int argc, char *argv[]) {
             }
             printf("\nFIN Affichage de la construction de l'arbre partie 2\n\n");
         }
-        //possibilité d'afficher l'arbre reçu ?
-        /* Fin Commenté par JT pour tester avec un arbre manuel*/
-
-        ////////////////////////////////////
-        //Rajout Julien T pour tester avec un arbre monté à la main
-            
-            /* début de la génération de l'arbre de test */
-            /* equation exemple  : f(x)=abs(2x))
-            donc arbre : abs -> abs -> x -> x
-                                            -> 2
-            */
-                /*Arbre Arb2 = (Arbre)malloc(sizeof(struct Node));//reservation de l'espace
-                Arb2->pjeton_preced=NULL;
-                Arb2->pjeton_suiv=NULL;
-                Arb2->jeton.lexem=REEL;
-                Arb2->jeton.valeur.reel=2;
-
-                Arbre Arbx = (Arbre)malloc(sizeof(struct Node));//reservation de l'espace;
-                Arbx->pjeton_preced=NULL;
-                Arbx->pjeton_suiv=NULL;
-                Arbx->jeton.lexem=VARIABLE;
-                //Arbx->jeton.valeur.reel=x;
-
-                Arbre Arbplus = (Arbre)malloc(sizeof(struct Node));//reservation de l'espace;;
-                Arbplus->pjeton_preced=Arb2;
-                Arbplus->pjeton_suiv=Arbx;
-                Arbplus->jeton.lexem=OPERATEUR;
-                Arbplus->jeton.valeur.operateur=FOIS;
-
-                Arbre Arbfonction = (Arbre)malloc(sizeof(struct Node));//reservation de l'espace;;
-                Arbfonction->pjeton_preced=Arbplus;
-                Arbfonction->pjeton_suiv=NULL;
-                Arbfonction->jeton.lexem=FONCTION;
-                Arbfonction->jeton.valeur.fonction=ABS;
-
-                Arbre Arbabs = (Arbre)malloc(sizeof(struct Node));//reservation de l'espace;;
-                Arbabs->pjeton_preced=Arbfonction;
-                Arbabs->pjeton_suiv=NULL;
-                Arbabs->jeton.lexem=FONCTION;
-                Arbabs->jeton.valeur.fonction=ABS;*/
-            //Fin de générationd d'un arbre manuellement
-        //////////////////////////////////
         
         /*#####################################################################
                       Partie 3 - Evaluateur
@@ -172,6 +132,12 @@ int main(int argc, char *argv[]) {
             printf("\nBorne inf et sup : %f - %f \n",borne_inf, borne_sup);
         }
         
+        // On définit le nombre de valeurs à évaluer
+        // voir si le graphique nous permettra de le demander à l'utilisateur par la suite
+        //nbr_valeur = 10;//passage en global
+
+        //On déclare un tableau de couples avec nbr_valeur
+        //Couple tab_valeur[nbr_valeur]; //passage en global
 
         ymin=0;
         ymax=0;
@@ -185,6 +151,7 @@ int main(int argc, char *argv[]) {
 
         /* Voici les valeur fournies par la partie 3 à la partie 4 : */
         //xmin xmax ymin ymax et le tableau de couples
+        
         printf("Bornes de x : min= %f - max= %f \n",borne_inf,borne_sup);
         printf("Bornes de y : min= %f - max= %f \n",ymin,ymax);
         
@@ -193,6 +160,7 @@ int main(int argc, char *argv[]) {
                       Partie 4 - Grapheur
             Traçage de la courbe 
         #####################################################################*/
+        
         //Initialisation de l'offset
         offset= 1.0 / (ymax - ymin);
         //Initialisation de l'échelle
@@ -202,6 +170,9 @@ int main(int argc, char *argv[]) {
 		Translate_y= -ymin;
         //Dessin de la courbe
     	InitGraph(argc, argv, "Grapheur", 1280, 720, Dessin, Cle);
+    
     }
+
+
     return 0;
 }

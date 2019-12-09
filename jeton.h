@@ -1,6 +1,10 @@
 #ifndef JETON_H
 #define JETON_H
 /*Jeton .h donné pour le projet */
+/*#####################################################################
+                      JETON.H commun à toutes les parties
+
+#####################################################################*/
 
 //énumération des différents types de lexems existants
 typedef enum{

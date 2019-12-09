@@ -245,6 +245,7 @@ void Cle(int c)//Fonction qui gère les entrées clavier (réglage zoom, offset 
 
 void Dessin()//Fonction qui dessine la courbe
 {
+
   glPushMatrix(); /* GL_MODELVIEW is default */
   //réglage du zoom et de l'offset
   glScalef(scale, offset, 1.0);
@@ -255,6 +256,19 @@ void Dessin()//Fonction qui dessine la courbe
   glClearColor(1.0, 1.0, 1.0, 0.0);
   glClear(GL_COLOR_BUFFER_BIT);
   //trace la courbe
+  
+  /*Ajout Julien T pour tracer les axes X et Y */
+  glBegin(GL_LINES);//permet de commencer à tracer des lignes
+          /* Axe des X */
+          glVertex2d(-100,0);
+          glVertex2d(100,0);      
+          /* Axe des Y */
+          glVertex2d(0,-100);
+          glVertex2d(0,100);      
+  glEnd();
+  /*Ajout Julien T pour tracer les axes X et Y */
+
+
   glBegin(GL_LINE_STRIP);
   //parcours des couples x,y
   for (int i = 0; i < (sizeof(tab_valeur) / 8)-1; i++)
