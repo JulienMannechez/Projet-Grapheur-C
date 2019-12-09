@@ -2,15 +2,14 @@
 #include <stdlib.h>
 #include "syntaxique.h"
 
+//Fonction qui créer un arbre (noeud ou feuille) 
 Arbre createArbre(typejeton tj, Arbre A, Arbre B){
     Arbre resultat = (Arbre)malloc(sizeof(struct Node));
     resultat->jeton.lexem=tj.lexem;
     if (tj.lexem==REEL)
     {   
-        //printf("creer arbre reel - tj.valeur.reel : %f\n\n",tj.valeur.reel);
         resultat->jeton.valeur=tj.valeur;
-        resultat->jeton.valeur.reel=tj.valeur.reel;
-        //printf("creer arbre reel - resultat->jeton.valeur.reel : %f\n\n",resultat->jeton.valeur.reel);
+        resultat->jeton.valeur.reel=tj.valeur.reel; //Pour les réels il faut préciser .valeur.reel
 
     }else
     {
@@ -19,117 +18,61 @@ Arbre createArbre(typejeton tj, Arbre A, Arbre B){
     resultat->pjeton_preced=A;
     resultat->pjeton_suiv=B;
     return(resultat);
-    ////printf("test");
 }
 
-
+//Fonction qui analyse et traverse un tableau placé en parametre pour créer un arbre binaire correspondant
 Arbre syntaxe(typejeton* tab , int* i){
-    ////printf("%d",*i);
     Arbre A, temp, newA;
     A = (Arbre)malloc(sizeof(struct Node));
     temp = (Arbre)malloc(sizeof(struct Node));
     newA = (Arbre)malloc(sizeof(struct Node));
     int compteur_par_ouv = 1;
     int indice_tab;
-    ////printf("%d", *i);
     while (tab[*i].lexem != FIN){
         switch (tab[*i].lexem){
+	    //On traite le cas où tab[*i] est un reel	
             case REEL:
-                /*if(tab[*i+1].lexem != OPERATEUR && tab[*i+1].lexem!=PAR_FERM){
-                    typejeton* tj = (typejeton*)malloc(sizeof(typejeton));
-                    tj->lexem=ERREUR;
-                    tj->valeur.reel=202;
-                    A = createArbre(*tj,NULL,NULL);
-                    //printf("REELa %d \n",*i);
-                    *i = *i +1;
-
-                }else{*/
                     newA = createArbre(tab[*i], NULL, NULL);
-                    printf("REEL %d \n",*i);
-                    //printf("valeur reel dans l'arbre : %f\n",newA->jeton.valeur.reel);
                     *i = *i + 1;
 
-               // }
                 break;
 
+            //On traite le cas où tab[*i] est une variable (x)
             case VARIABLE:
-                /*if(tab[*i+1].lexem!=OPERATEUR && tab[*i+1].lexem!=PAR_FERM){
-                    typejeton* tj = (typejeton*)malloc(sizeof(typejeton));
-                    tj->lexem=ERREUR;
-                    tj->valeur.reel=203;
-                    A = createArbre(*tj,NULL,NULL);
-                    //printf("VAR %d\n",*i);
-                    *i = *i +1;
-
-                }else{*/
                     newA = createArbre(tab[*i], NULL, NULL);
-                    printf("VAR %d\n",*i);
                     *i = *i +1;
-                //}
                 break;
-
+	    //On traite le cas où tab[*i] est un opérateur
             case OPERATEUR:
-                /*if(tab[*i+1].lexem!=REEL && tab[*i+1].lexem!=VARIABLE){
-                    typejeton* tj = (typejeton*)malloc(sizeof(typejeton));
-                    tj->lexem=ERREUR;
-                    tj->valeur.reel=200;
-                    A=createArbre(*tj,NULL,NULL);
-                    *i = *i +1;
-
-                }else if(tab[*i+2].lexem!=PAR_FERM){
-                    typejeton* tj = (typejeton*)malloc(sizeof(typejeton));
-                    tj->lexem=ERREUR;
-                    tj->valeur.reel=201;
-                    A=createArbre(*tj,NULL,NULL);
-                    *i = *i +1;
-
-                }else{*/
-                    ////printf("%d\n",indice_tab);
                     indice_tab = (*i)+1;
-                    temp = syntaxe(tab, &indice_tab);
-                    newA = createArbre(tab[*i],newA,temp);
-                    printf("OPE %d\n",*i);
+                    temp = syntaxe(tab, &indice_tab);//On crée un arbre temporaire que l'on va placer dans l'arbre à la suite de la fonction avec le pointeur suivant
+                    newA = createArbre(tab[*i],newA,temp);//On recreer l'arbre pour placer l'operateur au bon endroit dans l'arbre 
                     if(tab[*i+3].lexem == PAR_FERM){
                         *i = *i + 3;
                     }else{
                         *i = *i+2;
                     }
-                    
-
-                //}
                 break;
-
+	    //On traite le cas où tab[*i] est une fonction
             case FONCTION:
-                // if(tab[*i+1].lexem != PAR_OUV){
-                //     typejeton* tj = (typejeton*)malloc(sizeof(typejeton));
-                //     tj->lexem=ERREUR;
-                //     tj->valeur.reel=204;
-                //     newA=createArbre(*tj,NULL,NULL);
-                //     *i = *i +1;
-
-                // }else
                 {
                     int*  j = (int*)malloc(sizeof(int));
                     *j = *i + 1;
-                    //printf("%d",*i);
-                    temp = syntaxe(tab, j);
-                    newA = createArbre(tab[*i], temp, NULL);
-                    printf("FONC %d\n",*i);
+                    temp = syntaxe(tab, j);//On crée un arbre temporaire que l'on va placer dans l'arbre à la suite de la fonction avec le pointeur precedent
+                    newA = createArbre(tab[*i], temp, NULL);//On recreer l'arbre pour placer la fonction au bon endroit dans l'arbre 
                     int k = *j+1;
 
-                    //Voir pour cos(sin(2+x))
                     if(tab[k].lexem == FONCTION){   
                         while(tab[k].lexem != PAR_FERM && compteur_par_ouv!=1){
                             k++;
-                            if(tab[k].lexem == PAR_OUV){
-                                compteur_par_ouv++;
+                            if(tab[k].lexem == PAR_OUV){ 
+                                compteur_par_ouv++; //On compte le nombre de parentheses ouvrante pour arreter la fonction au bon moment
                             }
                             if(tab[k].lexem == PAR_FERM && compteur_par_ouv > 1){
-                                compteur_par_ouv--;
+                                compteur_par_ouv--;//On compte le nombre de parentheses ouvrante pour arreter la fonction au bon moment
                             }
-                            printf("%d", compteur_par_ouv);
                         }
-                        *i = k;
+                        *i = k;//*i = k pour que la fonction reprenne au bon endroit
                     }
                     if(tab[*i+5].lexem == PAR_FERM){
                         *i=*i+6;
@@ -138,15 +81,13 @@ Arbre syntaxe(typejeton* tab , int* i){
                     }
                 }
                 break;
-
+	    //On traite le cas où tab[*i] est une parenthese ouverte
             case PAR_OUV:
-                    printf("par_ouv %d\n", *i);
                     *i = *i +1;
 
                 break;
-
+            //On traite le cas où tab[*i] est une parenthese fermante
             case PAR_FERM:
-                    printf("par_fer %d\n", *i);
                     *i = *i +1;
                 break;
 
