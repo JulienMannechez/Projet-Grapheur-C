@@ -10,4 +10,4 @@ Idem supérieure.
 
 Dans la fenêtre de graphe, Z,Q,S,D sert à zoomer/dézoomer verticalement/horizontalement. Et I,J,K,L à se déplacer dans le sens des flèches.
 
-CTRL+C sur le shell hôte pour terminer l'éxecution.
+CTRL+C sur le shell hôte pour terminer l'éxecution (nécessaire pour ploter une seconde fonction).
