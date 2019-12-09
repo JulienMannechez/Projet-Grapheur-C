@@ -260,11 +260,11 @@ void Dessin()//Fonction qui dessine la courbe
   /*Ajout Julien T pour tracer les axes X et Y */
   glBegin(GL_LINES);//permet de commencer à tracer des lignes
           /* Axe des X */
-          glVertex2d(-100,0);
-          glVertex2d(100,0);      
+          glVertex2d(-1000,0);
+          glVertex2d(1000,0);      
           /* Axe des Y */
-          glVertex2d(0,-100);
-          glVertex2d(0,100);      
+          glVertex2d(0,-1000);
+          glVertex2d(0,1000);      
   glEnd();
   /*Ajout Julien T pour tracer les axes X et Y */
 
