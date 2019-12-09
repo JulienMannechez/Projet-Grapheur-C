@@ -166,8 +166,8 @@ int main(int argc, char** argv){//pour grapheur
         //Initialisation de l'échelle
 		scale= 1.0 / (borne_sup - borne_inf);
         //Initialisation de la position
-		Translate_x= -borne_inf;
-		Translate_y= -ymin;
+		Translate_x= 0.0;
+		Translate_y= 0.0;
         //Dessin de la courbe
     	InitGraph(argc, argv, "Grapheur", 1280, 720, Dessin, Cle);
     
