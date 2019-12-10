@@ -7,6 +7,8 @@
 #include <ctype.h>
 #include "jeton.h"
 
-typeerreur lexical(char str[], typejeton t[]);
+typeerreur lexical(char str[], typejeton* tab);
+
+void affichage_tableau_lexical(typejeton t[]);
 
 #endif
